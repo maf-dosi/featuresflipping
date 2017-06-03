@@ -23,7 +23,8 @@ namespace MAF.FeaturesFlipping
             var isFeatureActive = false;
             foreach (var featureActivator in _featureActivators)
             {
-                var featureActivationStatus = await featureActivator.GetFeatureStatus(featureName, featureContext);
+                var feature = await featureActivator.GetFeatureAsync(featureName) ?? NotSetFeature.Instance;
+                var featureActivationStatus = await feature.GetStatusAsync(featureContext);
                 switch (featureActivationStatus)
                 {
                     case FeatureActivationStatus.Inactive:
