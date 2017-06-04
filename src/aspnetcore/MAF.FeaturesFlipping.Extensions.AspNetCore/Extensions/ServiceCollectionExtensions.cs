@@ -6,7 +6,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IFeaturesFlippingBuilder AddFeatureFlipping(this IServiceCollection serviceCollection)
+        public static IFeaturesFlippingBuilder AddFeaturesFlipping(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IFeatureService, FeatureService>();
             
