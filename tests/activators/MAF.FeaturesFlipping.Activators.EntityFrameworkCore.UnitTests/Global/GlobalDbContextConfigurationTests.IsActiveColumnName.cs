@@ -3,25 +3,25 @@ using Xunit;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
 {
-    public partial class GlobalDbContextConfigurerTests
+    public partial class GlobalDbContextConfigurationTests
     {
         [Trait("Category", "UnitTest")]
-        public class FeatureColumnName
+        public class IsActiveColumnName
         {
             [Fact]
-            public void Calling_FeatureColumnName_With_A_New_Name_Changes_The_FeatureColumnName()
+            public void Calling_IsActiveColumnName_With_A_New_Name_Changes_The_IsActiveColumnName()
             {
                 // Arrange
                 var expectedSchema = "Feature";
                 var expectedTableName = "GlobalFeature";
                 var expectedApplicationColumnName = "Application";
                 var expectedScopeColumnName = "Scope";
-                var expectedFeatureColumnName = "NewFeatureColumn";
-                var expectedIsActiveColumnName = "IsActive";
-                var actual = new GlobalDbContextConfigurer(_ => { });
+                var expectedFeatureColumnName = "Feature";
+                var expectedIsActiveColumnName = "NewIsActiveColumn";
+                var actual = new GlobalDbContextConfiguration(_ => { });
 
                 // Act
-                actual.FeatureColumnName(expectedFeatureColumnName);
+                actual.IsActiveColumnName(expectedIsActiveColumnName);
 
                 // Assert
                 Assert.Equal(expectedSchema, actual.Schema());
@@ -33,7 +33,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
             }
 
             [Fact]
-            public void Calling_FeatureColumnName_With_A_Null_Doesnt_Change_The_FeatureColumnName()
+            public void Calling_IsActiveColumnName_With_A_Null_Doesnt_Change_The_IsActiveColumnName()
             {
                 // Arrange
                 var expectedSchema = "Feature";
@@ -42,10 +42,10 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var expectedScopeColumnName = "Scope";
                 var expectedFeatureColumnName = "Feature";
                 var expectedIsActiveColumnName = "IsActive";
-                var actual = new GlobalDbContextConfigurer(_ => { });
+                var actual = new GlobalDbContextConfiguration(_ => { });
 
                 // Act
-                actual.FeatureColumnName(null);
+                actual.IsActiveColumnName(null);
 
                 // Assert
                 Assert.Equal(expectedSchema, actual.Schema());
@@ -57,7 +57,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
             }
 
             [Fact]
-            public void Calling_FeatureColumnName_With_An_Empty_String_Doesnt_Change_The_FeatureColumnName()
+            public void Calling_IsActiveColumnName_With_An_Empty_String_Doesnt_Change_The_IsActiveColumnName()
             {
                 // Arrange
                 var expectedSchema = "Feature";
@@ -66,10 +66,10 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var expectedScopeColumnName = "Scope";
                 var expectedFeatureColumnName = "Feature";
                 var expectedIsActiveColumnName = "IsActive";
-                var actual = new GlobalDbContextConfigurer(_ => { });
+                var actual = new GlobalDbContextConfiguration(_ => { });
 
                 // Act
-                actual.FeatureColumnName("");
+                actual.IsActiveColumnName("");
 
                 // Assert
                 Assert.Equal(expectedSchema, actual.Schema());

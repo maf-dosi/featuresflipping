@@ -3,7 +3,7 @@ using Xunit;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
 {
-    public partial class GlobalDbContextConfigurerTests
+    public partial class GlobalDbContextConfigurationTests
     {
         [Trait("Category", "UnitTest")]
         public class ApplicationColumnName
@@ -18,7 +18,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var expectedScopeColumnName = "Scope";
                 var expectedFeatureColumnName = "Feature";
                 var expectedIsActiveColumnName = "IsActive";
-                var actual = new GlobalDbContextConfigurer(_ => { });
+                var actual = new GlobalDbContextConfiguration(_ => { });
 
                 // Act
                 actual.ApplicationColumnName(expectedApplicationColumnName);
@@ -42,7 +42,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var expectedScopeColumnName = "Scope";
                 var expectedFeatureColumnName = "Feature";
                 var expectedIsActiveColumnName = "IsActive";
-                var actual = new GlobalDbContextConfigurer(_ => { });
+                var actual = new GlobalDbContextConfiguration(_ => { });
 
                 // Act
                 actual.ApplicationColumnName(null);
@@ -66,7 +66,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var expectedScopeColumnName = "Scope";
                 var expectedFeatureColumnName = "Feature";
                 var expectedIsActiveColumnName = "IsActive";
-                var actual = new GlobalDbContextConfigurer(_ => { });
+                var actual = new GlobalDbContextConfiguration(_ => { });
 
                 // Act
                 actual.ApplicationColumnName("");

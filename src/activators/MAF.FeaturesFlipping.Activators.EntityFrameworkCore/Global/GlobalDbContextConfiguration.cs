@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
 {
-    public sealed class GlobalDbContextConfigurer
+    public sealed class GlobalDbContextConfiguration
     {
         private readonly Action<DbContextOptionsBuilder> _dbContextBuilderAction;
         private string _applicationColumnName;
@@ -13,7 +13,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
         private string _scopeColumnName;
         private string _tableName;
 
-        public GlobalDbContextConfigurer(Action<DbContextOptionsBuilder> dbContextBuilderAction)
+        public GlobalDbContextConfiguration(Action<DbContextOptionsBuilder> dbContextBuilderAction)
         {
             Schema("Feature")
                 .TableName("GlobalFeature")
@@ -29,7 +29,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             return _schema;
         }
 
-        public GlobalDbContextConfigurer Schema(string schema)
+        public GlobalDbContextConfiguration Schema(string schema)
         {
             _schema = schema ?? _schema;
             return this;
@@ -40,7 +40,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             return _tableName;
         }
 
-        public GlobalDbContextConfigurer TableName(string tableName)
+        public GlobalDbContextConfiguration TableName(string tableName)
         {
             if (!string.IsNullOrWhiteSpace(tableName))
             {
@@ -54,7 +54,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             return _applicationColumnName;
         }
 
-        public GlobalDbContextConfigurer ApplicationColumnName(string applicationColumnName)
+        public GlobalDbContextConfiguration ApplicationColumnName(string applicationColumnName)
         {
             if (!string.IsNullOrWhiteSpace(applicationColumnName))
             {
@@ -68,7 +68,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             return _scopeColumnName;
         }
 
-        public GlobalDbContextConfigurer ScopeColumnName(string scopeColumnName)
+        public GlobalDbContextConfiguration ScopeColumnName(string scopeColumnName)
         {
             if (!string.IsNullOrWhiteSpace(scopeColumnName))
             {
@@ -82,7 +82,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             return _featureColumnName;
         }
 
-        public GlobalDbContextConfigurer FeatureColumnName(string featureColumnName)
+        public GlobalDbContextConfiguration FeatureColumnName(string featureColumnName)
         {
             if (!string.IsNullOrWhiteSpace(featureColumnName))
             {
@@ -96,7 +96,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             return _isActiveColumnName;
         }
 
-        public GlobalDbContextConfigurer IsActiveColumnName(string isActiveColumnName)
+        public GlobalDbContextConfiguration IsActiveColumnName(string isActiveColumnName)
         {
             if (!string.IsNullOrWhiteSpace(isActiveColumnName))
             {
@@ -105,7 +105,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             return this;
         }
 
-        public void ConfigureDbContext(DbContextOptionsBuilder optionsBuilder)
+        internal void ConfigureDbContext(DbContextOptionsBuilder optionsBuilder)
         {
             _dbContextBuilderAction(optionsBuilder);
         }

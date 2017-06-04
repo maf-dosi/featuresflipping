@@ -31,6 +31,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAF.FeaturesFlipping.Extensions.AspNetCore", "src\aspnetcore\MAF.FeaturesFlipping.Extensions.AspNetCore\MAF.FeaturesFlipping.Extensions.AspNetCore.csproj", "{3457595F-7CFB-4C03-9FF2-799DD9C27A39}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspnetcore", "aspnetcore", "{6F0D42C5-4859-4EC5-857E-2753648CDEF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{B6B5D19B-7FEC-4D79-B630-18B9E1F7CD3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebSite", "samples\simplewebsite\SimpleWebSite\SimpleWebSite.csproj", "{93653151-B1FF-4FBB-97B8-26E2525E31D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "simplewebsite", "simplewebsite", "{19DB9871-B539-463D-A5D5-ADD408369977}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAF.FeaturesFlipping.Extensions.AspNetCore.EntityFrameworkCore", "src\aspnetcore\MAF.FeaturesFlipping.Extensions.AspNetCore.EntityFrameworkCore\MAF.FeaturesFlipping.Extensions.AspNetCore.EntityFrameworkCore.csproj", "{B99B372F-F15B-4431-A28C-BC27DCF81A05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +73,18 @@ Global
 		{B4F07498-CBFF-41F8-8EB4-131C46C8A7B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4F07498-CBFF-41F8-8EB4-131C46C8A7B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4F07498-CBFF-41F8-8EB4-131C46C8A7B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3457595F-7CFB-4C03-9FF2-799DD9C27A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3457595F-7CFB-4C03-9FF2-799DD9C27A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3457595F-7CFB-4C03-9FF2-799DD9C27A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3457595F-7CFB-4C03-9FF2-799DD9C27A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93653151-B1FF-4FBB-97B8-26E2525E31D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93653151-B1FF-4FBB-97B8-26E2525E31D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93653151-B1FF-4FBB-97B8-26E2525E31D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93653151-B1FF-4FBB-97B8-26E2525E31D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B99B372F-F15B-4431-A28C-BC27DCF81A05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B99B372F-F15B-4431-A28C-BC27DCF81A05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B99B372F-F15B-4431-A28C-BC27DCF81A05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B99B372F-F15B-4431-A28C-BC27DCF81A05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,5 +98,10 @@ Global
 		{2E6C17DF-93D2-42E5-8BF9-E7967741C838} = {91378479-4EF2-489D-AA0E-924E80D06C4C}
 		{EB0E8C89-DEB5-4DE7-9579-6EAD0C5430CE} = {2FBA5A4A-35D2-4A34-9870-26E5FD6C33C6}
 		{B4F07498-CBFF-41F8-8EB4-131C46C8A7B3} = {EB0E8C89-DEB5-4DE7-9579-6EAD0C5430CE}
+		{3457595F-7CFB-4C03-9FF2-799DD9C27A39} = {6F0D42C5-4859-4EC5-857E-2753648CDEF8}
+		{6F0D42C5-4859-4EC5-857E-2753648CDEF8} = {25D7998E-82BA-4740-ADD5-86FF5A2E5B23}
+		{93653151-B1FF-4FBB-97B8-26E2525E31D4} = {19DB9871-B539-463D-A5D5-ADD408369977}
+		{19DB9871-B539-463D-A5D5-ADD408369977} = {B6B5D19B-7FEC-4D79-B630-18B9E1F7CD3C}
+		{B99B372F-F15B-4431-A28C-BC27DCF81A05} = {6F0D42C5-4859-4EC5-857E-2753648CDEF8}
 	EndGlobalSection
 EndGlobal

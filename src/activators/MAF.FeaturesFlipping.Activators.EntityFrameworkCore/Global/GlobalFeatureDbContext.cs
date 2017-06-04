@@ -4,9 +4,9 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
 {
     internal class GlobalFeatureDbContext : DbContext
     {
-        private readonly GlobalDbContextConfigurer _globalDbContextConfigurer;
+        private readonly GlobalDbContextConfiguration _globalDbContextConfigurer;
 
-        public GlobalFeatureDbContext(GlobalDbContextConfigurer globalDbContextConfigurer)
+        public GlobalFeatureDbContext(GlobalDbContextConfiguration globalDbContextConfigurer)
         {
             _globalDbContextConfigurer = globalDbContextConfigurer;
         }

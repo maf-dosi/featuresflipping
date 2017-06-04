@@ -4,7 +4,7 @@ using Xunit;
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
 {
     [Trait("Category", "UnitTest")]
-    public partial class GlobalDbContextConfigurerTests
+    public partial class GlobalDbContextConfigurationTests
     {
         [Fact]
         public void The_Constructor_Sets_The_Default_Value()
@@ -18,7 +18,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
             var expectedIsActiveColumnName = "IsActive";
 
             // Act
-            var actual = new GlobalDbContextConfigurer(_ => { });
+            var actual = new GlobalDbContextConfiguration(_ => { });
 
             // Assert
             Assert.Equal(expectedSchema, actual.Schema());
