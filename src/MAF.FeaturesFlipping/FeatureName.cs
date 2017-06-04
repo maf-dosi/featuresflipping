@@ -1,6 +1,4 @@
-﻿using MAF.Extensions.FeaturesFlipping;
-
-namespace MAF.FeaturesFlipping
+﻿namespace MAF.FeaturesFlipping
 {
     public sealed class FeatureName : IFeatureName
     {

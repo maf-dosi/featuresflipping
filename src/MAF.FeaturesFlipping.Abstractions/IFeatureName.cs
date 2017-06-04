@@ -1,4 +1,4 @@
-﻿namespace MAF.Extensions.FeaturesFlipping
+﻿namespace MAF.FeaturesFlipping
 {
     public interface IFeatureName
     {

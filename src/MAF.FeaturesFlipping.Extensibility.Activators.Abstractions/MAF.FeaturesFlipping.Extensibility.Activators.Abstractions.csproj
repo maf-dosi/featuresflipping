@@ -4,6 +4,7 @@
     <TargetFramework>netstandard1.0</TargetFramework>
     <Optimize>True</Optimize>
     <DebugSymbols>True</DebugSymbols>
+    <RootNamespace>MAF.FeaturesFlipping.Extensibility.Activators</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

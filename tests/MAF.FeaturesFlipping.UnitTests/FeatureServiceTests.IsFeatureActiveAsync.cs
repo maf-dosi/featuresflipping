@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using MAF.Extensions.FeaturesFlipping;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Moq;
 using Xunit;

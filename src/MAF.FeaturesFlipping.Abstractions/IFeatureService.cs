@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace MAF.Extensions.FeaturesFlipping
+namespace MAF.FeaturesFlipping
 {
     public interface IFeatureService
     {

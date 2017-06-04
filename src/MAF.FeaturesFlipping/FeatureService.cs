@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MAF.Extensions.FeaturesFlipping;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 
 namespace MAF.FeaturesFlipping
