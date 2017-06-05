@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
-namespace MAF.FeaturesFlipping.Extensions.AspNetCore
+namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
 {
     public static class FeaturesFlippingBuilderExtensions
     {

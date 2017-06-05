@@ -1,5 +1,5 @@
 ﻿using MAF.FeaturesFlipping;
-using MAF.FeaturesFlipping.Extensions.AspNetCore;
+using MAF.FeaturesFlipping.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection

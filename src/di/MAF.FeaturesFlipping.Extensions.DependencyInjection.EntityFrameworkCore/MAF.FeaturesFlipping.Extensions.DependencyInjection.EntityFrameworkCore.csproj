@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\activators\MAF.FeaturesFlipping.Activators.EntityFrameworkCore\MAF.FeaturesFlipping.Activators.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\MAF.FeaturesFlipping.Extensions.AspNetCore\MAF.FeaturesFlipping.Extensions.AspNetCore.csproj" />
+    <ProjectReference Include="..\MAF.FeaturesFlipping.Extensions.DependencyInjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>

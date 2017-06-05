@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MAF.FeaturesFlipping.Extensions.AspNetCore
+namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
 {
     internal class FeaturesFlippingBuilder : IFeaturesFlippingBuilder
     {

@@ -20,11 +20,10 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\aspnetcore\MAF.FeaturesFlipping.Extensions.AspNetCore.EntityFrameworkCore\MAF.FeaturesFlipping.Extensions.AspNetCore.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\..\src\aspnetcore\MAF.FeaturesFlipping.Extensions.AspNetCore\MAF.FeaturesFlipping.Extensions.AspNetCore.csproj" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\..\..\src\di\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

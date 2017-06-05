@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace MAF.FeaturesFlipping.Extensions.AspNetCore.UnitTests
+namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests
 {
     public partial class ServiceCollectionExtensionsTests
     {

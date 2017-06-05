@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\aspnetcore\MAF.FeaturesFlipping.Extensions.AspNetCore\MAF.FeaturesFlipping.Extensions.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\src\di\MAF.FeaturesFlipping.Extensions.DependencyInjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
 
   <ItemGroup>

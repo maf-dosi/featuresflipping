@@ -2,7 +2,7 @@
 using Moq;
 using Xunit;
 
-namespace MAF.FeaturesFlipping.Extensions.AspNetCore.UnitTests
+namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests
 {
     [Trait("Category", "UnitTest")]
     public class FeaturesFlippingBuilderTests
