@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global;
+﻿using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Xunit;
 

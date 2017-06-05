@@ -33,6 +33,7 @@ namespace MAF.FeaturesFlipping
                         break;
                 }
             }
+            _featureContextAccessor.DisposeFeatureContext(featureContext);
             return isFeatureActive;
         }
     }

@@ -30,7 +30,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .Verifiable("hould never be called after inactive");
 
                 var featureService = new FeatureService(
-                    new[] {featureActivatorInactiveMock.Object, featureActivatorNeverCalledMock.Object},
+                    new[] { featureActivatorInactiveMock.Object, featureActivatorNeverCalledMock.Object },
                     featureContextAccessorMock.Object);
 
                 // Act
@@ -40,7 +40,6 @@ namespace MAF.FeaturesFlipping.UnitTests
                 Assert.False(actual);
                 featureActivatorNeverCalledMock.Verify(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()), Times.Never);
             }
-
             [Fact]
             public void Returns_False_When_Features_Are_Inactive_NotSet_Active()
             {
@@ -87,7 +86,6 @@ namespace MAF.FeaturesFlipping.UnitTests
                 // Assert
                 Assert.False(actual);
             }
-
             [Fact]
             public void Returns_False_When_No_FeatureActivators_Are_Provided()
             {
@@ -104,7 +102,6 @@ namespace MAF.FeaturesFlipping.UnitTests
                 // Assert
                 Assert.False(actual);
             }
-
             [Fact]
             public void Returns_False_When_No_Features_Are_Found()
             {
@@ -125,7 +122,6 @@ namespace MAF.FeaturesFlipping.UnitTests
                 // Assert
                 Assert.False(actual);
             }
-
             [Fact]
             public void Returns_True_When_Features_Are_Active()
             {
@@ -230,6 +226,50 @@ namespace MAF.FeaturesFlipping.UnitTests
 
                 // Assert
                 Assert.True(actual);
+            }
+
+            [Fact]
+            public async void DisposeFeatureContext_Is_Called_After_All_Features_Are_Checked()
+            {
+                // Arrange
+                var featureContextMock = new Mock<IFeatureContext>();
+                var mockSequence = new MockSequence();
+                var featureContextAccessorMock = new Mock<IFeatureContextAccessor>();
+                featureContextAccessorMock.InSequence(mockSequence).Setup(_ => _.GetCurrentFeatureContext())
+                    .Returns(featureContextMock.Object);
+                featureContextAccessorMock.InSequence(mockSequence).Setup(_ => _.DisposeFeatureContext(featureContextMock.Object))
+                    .Verifiable();
+
+                var notSetFeatureMock = new Mock<IFeature>();
+                notSetFeatureMock.Setup(_ => _.GetStatusAsync(featureContextMock.Object))
+                    .ReturnsAsync(FeatureActivationStatus.NotSet);
+                var featureActivatorNotSetMock = new Mock<IFeatureActivator>();
+                featureActivatorNotSetMock
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .ReturnsAsync(notSetFeatureMock.Object);
+
+                var activeFeatureMock = new Mock<IFeature>();
+                activeFeatureMock.Setup(_ => _.GetStatusAsync(featureContextMock.Object))
+                    .ReturnsAsync(FeatureActivationStatus.Active);
+                var featureActivatorActiveMock = new Mock<IFeatureActivator>();
+                featureActivatorActiveMock
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .ReturnsAsync(activeFeatureMock.Object);
+                var featureService = new FeatureService(
+                    new[]
+                    {
+                        featureActivatorNotSetMock.Object,
+                        featureActivatorActiveMock.Object
+                    }, featureContextAccessorMock.Object);
+
+                // Act
+                var actual = await featureService.IsFeatureActiveAsync(new FeatureName("", "", ""));
+
+                // Assert
+                Assert.True(actual);
+
+                featureContextAccessorMock.Verify(_ => _.GetCurrentFeatureContext(), Times.Once);
+                featureContextAccessorMock.Verify(_ => _.DisposeFeatureContext(featureContextMock.Object), Times.Once);
             }
         }
     }

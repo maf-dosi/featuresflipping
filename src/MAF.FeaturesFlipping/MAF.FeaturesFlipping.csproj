@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MAF.FeaturesFlipping.Abstractions\MAF.FeaturesFlipping.Abstractions.csproj" />
     <ProjectReference Include="..\MAF.FeaturesFlipping.Extensibility.Activators.Abstractions\MAF.FeaturesFlipping.Extensibility.Activators.Abstractions.csproj" />
+    <ProjectReference Include="..\MAF.FeaturesFlipping.Extensibility.FeatureContext.Abstractions\MAF.FeaturesFlipping.Extensibility.FeatureContext.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
