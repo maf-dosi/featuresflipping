@@ -6,23 +6,20 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
 {
     public class GlobalEntityFrameworkCoreActivator : IFeatureActivator
     {
-        private readonly GlobalDbContextConfiguration _globalDbContextConfigurer;
+        private readonly GlobalFeatureDbContext _globalFeatureDbContext;
 
-        public GlobalEntityFrameworkCoreActivator(GlobalDbContextConfiguration globalDbContextConfigurer)
+        public GlobalEntityFrameworkCoreActivator(GlobalFeatureDbContext globalFeatureDbContext)
         {
-            _globalDbContextConfigurer = globalDbContextConfigurer;
+            _globalFeatureDbContext = globalFeatureDbContext;
         }
 
         public async Task<IFeature> GetFeatureAsync(IFeatureName featureName)
         {
-            using (var globalFeatureDbContext = new GlobalFeatureDbContext(_globalDbContextConfigurer))
-            {
-                var globalFeatureEntity = await globalFeatureDbContext.Features.FirstOrDefaultAsync(
-                    feature => feature.Application == featureName.Application && feature.Scope ==
-                               featureName.Scope && feature.Feature == featureName.Feature);
-                var globalFeature = new GlobalFeature(globalFeatureEntity);
-                return globalFeature;
-            }
+            var globalFeatureEntity = await _globalFeatureDbContext.Features.FirstOrDefaultAsync(
+                feature => feature.Application == featureName.Application && feature.Scope ==
+                           featureName.Scope && feature.Feature == featureName.Feature);
+            var globalFeature = new GlobalFeature(globalFeatureEntity);
+            return globalFeature;
         }
     }
 }

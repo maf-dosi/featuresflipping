@@ -2,7 +2,7 @@
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
 {
-    internal class GlobalFeatureDbContext : DbContext
+    public class GlobalFeatureDbContext : DbContext
     {
         private readonly GlobalDbContextConfiguration _globalDbContextConfigurer;
 
@@ -27,6 +27,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
                 .Metadata.Relational();
             relationalMetadata.Schema = _globalDbContextConfigurer.Schema();
             relationalMetadata.TableName = _globalDbContextConfigurer.TableName();
+            featureEntityModelBuilder.HasKey(globalFeatureEntity => globalFeatureEntity.FeatureId);
             featureEntityModelBuilder.Property(_ => _.Application)
                 .IsRequired().HasColumnName(_globalDbContextConfigurer.ApplicationColumnName());
             featureEntityModelBuilder.Property(_ => _.Scope)
