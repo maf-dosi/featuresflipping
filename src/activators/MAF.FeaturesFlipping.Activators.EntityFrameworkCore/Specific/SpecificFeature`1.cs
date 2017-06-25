@@ -16,6 +16,10 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
 
         public Task<FeatureActivationStatus> GetStatusAsync(IFeatureContext featureContext)
         {
+            if (_specificFeatureEntity == null || _specificDbContextConfiguration == null)
+            {
+                return Task.FromResult(FeatureActivationStatus.NotSet);
+            }
             return _specificDbContextConfiguration.FilterFeatureActivationStatusAsync(_specificFeatureEntity, featureContext);
         }
     }
