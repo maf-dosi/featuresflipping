@@ -4,6 +4,10 @@
     <TargetFramework>netstandard1.3</TargetFramework>
     <Optimize>True</Optimize>
     <DebugSymbols>True</DebugSymbols>
+    <Version>0.1.0</Version>
+    <Authors>MAF-DOSI</Authors>
+    <Company>MAF-DOSI</Company>
+    <Description>MAF implementation of Features flipping</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
