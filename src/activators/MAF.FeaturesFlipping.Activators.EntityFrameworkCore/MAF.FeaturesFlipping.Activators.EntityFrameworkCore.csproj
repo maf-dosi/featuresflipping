@@ -1,21 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../MAF.FeaturesFlipping.CommonAssemblyInfo.props" />
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
-    <Optimize>True</Optimize>
-    <DebugSymbols>True</DebugSymbols>
-    <Version>0.1.0</Version>
-    <Authors>MAF-DOSI</Authors>
-    <Company>MAF-DOSI</Company>
-    <Description>MAF implementation of Features flipping</Description>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,12 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MAF.FeaturesFlipping.Extensibility.Activators.Abstractions\MAF.FeaturesFlipping.Extensibility.Activators.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Runtime">
-      <HintPath>..\..\..\..\..\..\Users\mgrosperrin\.nuget\packages\system.runtime\4.3.0\ref\netstandard1.0\System.Runtime.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
