@@ -27,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		LICENSE = LICENSE
+		src\MAF.FeaturesFlipping.CommonAssemblyInfo.props = src\MAF.FeaturesFlipping.CommonAssemblyInfo.props
 		MAF.FeaturesFlipping.runsettings = MAF.FeaturesFlipping.runsettings
 		README.md = README.md
 	EndProjectSection
@@ -43,11 +44,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencyinjection", "depe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection", "src\di\MAF.FeaturesFlipping.Extensions.DependencyInjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj", "{EEE6B1B8-3DB0-41F5-A431-309E9C7342AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore", "src\di\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore.csproj", "{8C26DB9D-C7AD-44EC-AEBA-DF31FC96A57F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore", "src\di\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore.csproj", "{8C26DB9D-C7AD-44EC-AEBA-DF31FC96A57F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencyinjection", "dependencyinjection", "{6F37E2FD-3C17-4FDE-A605-116E9BE2F800}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests", "tests\di\MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests\MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests.csproj", "{347104BB-451A-4F89-BB47-CA832FB7F856}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests", "tests\di\MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests\MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests.csproj", "{347104BB-451A-4F89-BB47-CA832FB7F856}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

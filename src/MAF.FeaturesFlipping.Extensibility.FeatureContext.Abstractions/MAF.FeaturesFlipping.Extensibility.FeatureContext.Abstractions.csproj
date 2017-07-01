@@ -1,12 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../MAF.FeaturesFlipping.CommonAssemblyInfo.props" />
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
-    <RootNamespace>MAF.FeaturesFlipping.Extensibility.FeatureContext</RootNamespace>
-    <Version>0.1.0</Version>
-    <Authors>MAF-DOSI</Authors>
-    <Company>MAF-DOSI</Company>
-    <Description>MAF implementation of Features flipping</Description>
   </PropertyGroup>
 
   <ItemGroup>
