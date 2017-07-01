@@ -54,6 +54,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspnet", "aspnet", "{5EBC06
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.AspNetCore", "src\aspnet\MAF.FeaturesFlipping.AspNetCore\MAF.FeaturesFlipping.AspNetCore.csproj", "{B923E1DA-5A49-4692-8AC9-A050ED657C69}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A8B84E74-4790-4D82-B810-CA54BF7E220B}"
+	ProjectSection(SolutionItems) = preProject
+		docs\index.md = docs\index.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspnet", "aspnet", "{087E0A3C-3DE9-4D8A-8B1B-AA5DC7471A88}"
+	ProjectSection(SolutionItems) = preProject
+		docs\aspnet\index.md = docs\aspnet\index.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,5 +141,6 @@ Global
 		{347104BB-451A-4F89-BB47-CA832FB7F856} = {6F37E2FD-3C17-4FDE-A605-116E9BE2F800}
 		{5EBC06E8-2BEF-44D2-8369-30E66EB107BD} = {25D7998E-82BA-4740-ADD5-86FF5A2E5B23}
 		{B923E1DA-5A49-4692-8AC9-A050ED657C69} = {5EBC06E8-2BEF-44D2-8369-30E66EB107BD}
+		{087E0A3C-3DE9-4D8A-8B1B-AA5DC7471A88} = {A8B84E74-4790-4D82-B810-CA54BF7E220B}
 	EndGlobalSection
 EndGlobal
