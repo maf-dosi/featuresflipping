@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
+    <RootNamespace>MAF.FeaturesFlipping.Extensibility.FeatureContext</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

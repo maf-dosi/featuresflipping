@@ -34,7 +34,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
         private static SpecificFeatureDbContext<string> PopulateNewContext(string databaseName, string otherColumnName,
             Func<SpecificFeatureEntity<string>, IFeatureContext, Task<FeatureActivationStatus>> filterSpecificFeature)
         {
-            var context = CreateNewContext<string>(databaseName, otherColumnName, filterSpecificFeature);
+            var context = CreateNewContext(databaseName, otherColumnName, filterSpecificFeature);
             PopulateContext(context);
             return context;
         }
