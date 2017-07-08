@@ -21,14 +21,8 @@ namespace MAF.FeaturesFlipping.AspNetCore
 
         public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
         {
-            var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
-
-            using (var scope = scopeFactory.CreateScope())
-            {
-                var featureService = scope.ServiceProvider.GetRequiredService<IFeatureService>();
-
-                return new FeatureResourceFilter(featureService, new FeatureName(Application, Scope, Feature));
-            }
+            var featureService = serviceProvider.GetRequiredService<IFeatureService>();
+            return new FeatureResourceFilter(featureService, new FeatureName(Application, Scope, Feature));
         }
 
         public bool IsReusable => false;
