@@ -15,6 +15,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
 
         private static void PopulateContext(GlobalFeatureDbContext context)
         {
+            context.Features.RemoveRange(context.Features.ToList());
             context.Features.AddRange(
                 Enumerable.Range(1, 10).Select(i => new GlobalFeatureEntity
                 {

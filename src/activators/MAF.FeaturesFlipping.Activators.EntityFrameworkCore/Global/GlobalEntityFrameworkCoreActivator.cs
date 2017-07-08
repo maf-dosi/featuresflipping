@@ -18,8 +18,8 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             var globalFeatureEntity = await _globalFeatureDbContext.Features.FirstOrDefaultAsync(
                 feature => feature.Application == featureName.Application && feature.Scope ==
                            featureName.Scope && feature.Feature == featureName.Feature);
-            var globalFeature = new GlobalFeature(globalFeatureEntity);
-            return globalFeature;
+            var featureFromEntity = new FeatureFromEntity(globalFeatureEntity);
+            return featureFromEntity;
         }
     }
 }

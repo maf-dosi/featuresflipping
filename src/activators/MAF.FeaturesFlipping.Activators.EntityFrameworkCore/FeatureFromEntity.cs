@@ -1,21 +1,21 @@
 ﻿using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 
-namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
+namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore
 {
-    internal class GlobalFeature : IFeature
+    internal class FeatureFromEntity : IFeature
     {
         private readonly FeatureActivationStatus _featureActivationStatus;
 
-        public GlobalFeature(GlobalFeatureEntity globalFeatureEntity)
+        public FeatureFromEntity(IFeatureEntity featureEntity)
         {
-            if (globalFeatureEntity == null || globalFeatureEntity.IsActive == null)
+            if (featureEntity == null || featureEntity.IsActive == null)
             {
                 _featureActivationStatus = FeatureActivationStatus.NotSet;
             }
             else
             {
-                _featureActivationStatus = (bool)globalFeatureEntity.IsActive
+                _featureActivationStatus = (bool)featureEntity.IsActive
                     ? FeatureActivationStatus.Active
                     : FeatureActivationStatus.Inactive;
             }

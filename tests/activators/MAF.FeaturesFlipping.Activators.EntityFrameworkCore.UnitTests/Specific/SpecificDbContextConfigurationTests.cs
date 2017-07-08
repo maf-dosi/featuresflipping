@@ -19,7 +19,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
             var expectedOtherColumnName = "Other";
 
             // Act
-            var actual = new SpecificDbContextConfiguration<string>(_ => { }, expectedOtherColumnName, (_, __) => null);
+            var actual = new SpecificDbContextConfiguration<string>(_ => { }, expectedOtherColumnName, _ => feature => false);
 
             // Assert
             Assert.Equal(expectedSchema, actual.Schema());

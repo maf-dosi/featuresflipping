@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific;
+﻿using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Xunit;
 
@@ -10,39 +9,29 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
         [Trait("Category", "UnitTest")]
         public class GetFeatureAsync
         {
-            [Fact]
-            public async void Searching_A_Non_Existing_Feature_Return_A_NotSet_Feature()
+            [Theory]
+            [InlineData("OtherColumn0", FeatureActivationStatus.NotSet)]
+            [InlineData("OtherColumn1", FeatureActivationStatus.Active)]
+            [InlineData("OtherColumn2", FeatureActivationStatus.Inactive)]
+            [InlineData("OtherColumn3", FeatureActivationStatus.NotSet)]
+            public async void Searching_A_Feature_Return_A_Correct_Activation_Status(
+                string otherColumnValue, FeatureActivationStatus featureActivationStatus)
             {
                 // Arrange
-                var databaseName = $"{nameof(GetFeatureAsync)}:{nameof(Searching_A_Non_Existing_Feature_Return_A_NotSet_Feature)}";
-                
-                var context = PopulateNewContext(databaseName, "otherColumnName", (_, __) => Task.FromResult(FeatureActivationStatus.NotSet));
+                var databaseName = $"{nameof(GetFeatureAsync)}:{nameof(Searching_A_Feature_Return_A_Correct_Activation_Status)}";
+
+                var context = PopulateNewContext(databaseName, "otherColumnName", _ => f => f.OtherColumn == otherColumnValue);
                 var activator = new SpecificEntityFrameworkCoreActivator<string>(context);
 
                 // Act
-                var feature = await activator.GetFeatureAsync(new FeatureName("", "", ""));
+                var actualFeature = await activator.GetFeatureAsync(new FeatureName(otherColumnValue.Replace("OtherColumn", "App"),
+                    otherColumnValue.Replace("OtherColumn", "Scope"),
+                    otherColumnValue.Replace("OtherColumn", "Feature")));
 
                 // Assert
-                Assert.NotNull(feature);
-                var featureActivationStatus = await feature.GetStatusAsync(null);
-                Assert.Equal(FeatureActivationStatus.NotSet, featureActivationStatus);
-            }
-
-            [Fact]
-            public async void Searching_A_Active_Existing_Feature_Return_A_Active_Feature()
-            {
-                // Arrange
-                var databaseName = $"{nameof(GetFeatureAsync)}:{nameof(Searching_A_Active_Existing_Feature_Return_A_Active_Feature)}";
-                var context = PopulateNewContext(databaseName, "otherColumnName", (_, __) => Task.FromResult(FeatureActivationStatus.Active));
-                var activator = new SpecificEntityFrameworkCoreActivator<string>(context);
-
-                // Act
-                var feature = await activator.GetFeatureAsync(new FeatureName("App3", "Scope3", "Feature3"));
-
-                // Assert
-                Assert.NotNull(feature);
-                var featureActivationStatus = await feature.GetStatusAsync(null);
-                Assert.Equal(FeatureActivationStatus.Active, featureActivationStatus);
+                Assert.NotNull(actualFeature);
+                var actualActivationStatus = await actualFeature.GetStatusAsync(null);
+                Assert.Equal(featureActivationStatus, actualActivationStatus);
             }
         }
     }

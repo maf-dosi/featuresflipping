@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using MAF.FeaturesFlipping.Extensibility.Activators;
-using MAF.FeaturesFlipping.Extensions.DependencyInjection;
+﻿using MAF.FeaturesFlipping.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,18 +15,12 @@ namespace SimpleWebSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddFeaturesFlipping()
-                .AddSpecificEntityFrameworkCoreActivator<string>(_ => _.UseInMemoryDatabase(), "TenantId", (entity, featureContext) =>
-               {
-                   if (entity.OtherColumn == featureContext.GetPart<string>("TenantId"))
-                   {
-                       return entity.IsActive == null
-                           ? Task.FromResult(FeatureActivationStatus.NotSet)
-                           : entity.IsActive.Value
-                               ? Task.FromResult(FeatureActivationStatus.Active)
-                               : Task.FromResult(FeatureActivationStatus.Inactive);
-                   }
-                   return Task.FromResult(FeatureActivationStatus.NotSet);
-               })
+                .AddSpecificEntityFrameworkCoreActivator<string>(_ => _.UseInMemoryDatabase(), "TenantId",
+                    featureContext =>
+                    {
+                        var tenantId = featureContext.GetPart<string>("TenantId");
+                        return feature => feature.OtherColumn == tenantId;
+                    })
                 .AddGlobalEntityFrameworkCoreActivator(_ => { _.UseInMemoryDatabase(); },
                     _ => _.Schema("ee"));
         }

@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
-using Microsoft.EntityFrameworkCore;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
 {
@@ -13,13 +13,15 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
             _specificFeatureDbContext = specificFeatureDbContext;
         }
 
-        public async Task<IFeature> GetFeatureAsync(IFeatureName featureName)
+        public Task<IFeature> GetFeatureAsync(IFeatureName featureName)
         {
-            var globalFeatureEntity = await _specificFeatureDbContext.Features.FirstOrDefaultAsync(
-                feature => feature.Application == featureName.Application && feature.Scope ==
-                           featureName.Scope && feature.Feature == featureName.Feature);
-            var globalFeature = new SpecificFeature<TOtherColumn>(globalFeatureEntity, _specificFeatureDbContext.SpecificConfiguration);
-            return globalFeature;
+            var specificFeatureQuery = _specificFeatureDbContext.Features.Where(
+                feature => feature.Application == featureName.Application
+                               && feature.Scope == featureName.Scope
+                               && feature.Feature == featureName.Feature);
+            
+            var specificFeature = new SpecificFeature<TOtherColumn>(specificFeatureQuery, _specificFeatureDbContext.SpecificConfiguration);
+            return Task.FromResult<IFeature>(specificFeature);
         }
     }
 }

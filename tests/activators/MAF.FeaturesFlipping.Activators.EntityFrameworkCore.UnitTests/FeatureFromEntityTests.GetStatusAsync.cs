@@ -2,9 +2,9 @@
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Xunit;
 
-namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
+namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests
 {
-    public partial class GlobalFeatureTests
+    public partial class FeatureFromEntityTests
     {
         [Trait("Category", "UnitTest")]
         public class GetStatusAsync
@@ -13,11 +13,11 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
             public void A_Null_GlobalFeatureEntity_Defines_A_NotSet_Status()
             {
                 // Arrange
-                var globalFeature = new GlobalFeature(null);
+                var featureFromEntity = new FeatureFromEntity(null);
                 var expected = FeatureActivationStatus.NotSet;
 
                 // Act
-                var actual = globalFeature.GetStatusAsync(null).Result;
+                var actual = featureFromEntity.GetStatusAsync(null).Result;
 
                 // Assert
                 Assert.Equal(expected, actual);
@@ -28,11 +28,11 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
             {
                 // Arrange
                 var entity = new GlobalFeatureEntity();
-                var globalFeature = new GlobalFeature(entity);
+                var featureFromEntity = new FeatureFromEntity(entity);
                 var expected = FeatureActivationStatus.NotSet;
 
                 // Act
-                var actual = globalFeature.GetStatusAsync(null).Result;
+                var actual = featureFromEntity.GetStatusAsync(null).Result;
 
                 // Assert
                 Assert.Equal(expected, actual);
@@ -43,11 +43,11 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
             {
                 // Arrange
                 GlobalFeatureEntity entity = new GlobalFeatureEntity { IsActive = true };
-                var globalFeature = new GlobalFeature(entity);
+                var featureFromEntity = new FeatureFromEntity(entity);
                 var expected = FeatureActivationStatus.Active;
 
                 // Act
-                var actual = globalFeature.GetStatusAsync(null).Result;
+                var actual = featureFromEntity.GetStatusAsync(null).Result;
 
                 // Assert
                 Assert.Equal(expected, actual);
@@ -58,11 +58,11 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
             {
                 // Arrange
                 GlobalFeatureEntity entity = new GlobalFeatureEntity { IsActive = false };
-                var globalFeature = new GlobalFeature(entity);
+                var featureFromEntity = new FeatureFromEntity(entity);
                 var expected = FeatureActivationStatus.Inactive;
 
                 // Act
-                var actual = globalFeature.GetStatusAsync(null).Result;
+                var actual = featureFromEntity.GetStatusAsync(null).Result;
 
                 // Assert
                 Assert.Equal(expected, actual);

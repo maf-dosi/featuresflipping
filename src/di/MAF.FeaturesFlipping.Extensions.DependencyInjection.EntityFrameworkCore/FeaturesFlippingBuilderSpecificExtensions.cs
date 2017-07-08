@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Microsoft.EntityFrameworkCore;
@@ -11,30 +11,24 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
 {
     public static class FeaturesFlippingBuilderSpecificExtensions
     {
-        public static IFeaturesFlippingBuilder AddSpecificEntityFrameworkCoreActivator<TOtherColumn>(
-            this IFeaturesFlippingBuilder featureFlippingBuilder,
+        public static IFeaturesFlippingBuilder AddSpecificEntityFrameworkCoreActivator<TOtherColumn>(this IFeaturesFlippingBuilder featureFlippingBuilder, 
             Action<DbContextOptionsBuilder> dbContextBuilderAction, string otherColumnName,
-            Func<SpecificFeatureEntity<TOtherColumn>, IFeatureContext, Task<FeatureActivationStatus>>
-                filterSpecificFeature)
+            Func<IFeatureContext, Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>>> specificFeatureFilterWithContext)
         {
             return featureFlippingBuilder.AddSpecificEntityFrameworkCoreActivator(dbContextBuilderAction, otherColumnName,
-                filterSpecificFeature, _ => { });
+                specificFeatureFilterWithContext, _ => { });
         }
 
-        public static IFeaturesFlippingBuilder AddSpecificEntityFrameworkCoreActivator<TOtherColumn>(
-            this IFeaturesFlippingBuilder featureFlippingBuilder,
+        public static IFeaturesFlippingBuilder AddSpecificEntityFrameworkCoreActivator<TOtherColumn>(this IFeaturesFlippingBuilder featureFlippingBuilder,
             Action<DbContextOptionsBuilder> dbContextBuilderAction, string otherColumnName,
-            Func<SpecificFeatureEntity<TOtherColumn>, IFeatureContext, Task<FeatureActivationStatus>>
-                filterSpecificFeature, Action<SpecificDbContextConfiguration<TOtherColumn>> specificDbContextConfigurer)
+            Func<IFeatureContext, Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>>> specificFeatureFilterWithContext, Action<SpecificDbContextConfiguration<TOtherColumn>> specificDbContextConfigurer)
         {
-            featureFlippingBuilder.Services
-                .AddScoped<IFeatureActivator, SpecificEntityFrameworkCoreActivator<TOtherColumn>>();
-            featureFlippingBuilder.Services.AddEntityFramework()
-                .AddDbContext<SpecificFeatureDbContext<TOtherColumn>>();
+            featureFlippingBuilder.Services.AddScoped<IFeatureActivator, SpecificEntityFrameworkCoreActivator<TOtherColumn>>();
+            featureFlippingBuilder.Services.AddEntityFramework().AddDbContext<SpecificFeatureDbContext<TOtherColumn>>();
 
             var specificDbContextConfiguration =
                 new SpecificDbContextConfiguration<TOtherColumn>(dbContextBuilderAction, otherColumnName,
-                    filterSpecificFeature);
+                    specificFeatureFilterWithContext);
             specificDbContextConfigurer(specificDbContextConfiguration);
             featureFlippingBuilder.Services.AddSingleton(specificDbContextConfiguration);
             return featureFlippingBuilder;
