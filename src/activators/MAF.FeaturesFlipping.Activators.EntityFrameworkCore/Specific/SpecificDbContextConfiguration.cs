@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,19 +8,26 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
     public sealed class SpecificDbContextConfiguration<TOtherColumn>
     {
         private readonly Action<DbContextOptionsBuilder> _dbContextBuilderAction;
-        private readonly Func<SpecificFeatureEntity<TOtherColumn>, IFeatureContext, Task<FeatureActivationStatus>> _filterSpecificFeature;
+
+        private readonly Func<IFeatureContext, Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>>>
+            _specificFeatureFilterWithContext;
+
         private string _applicationColumnName;
         private string _featureColumnName;
         private string _isActiveColumnName;
+        private string _otherColumnName;
         private string _schema;
         private string _scopeColumnName;
         private string _tableName;
-        private string _otherColumnName;
 
-        public SpecificDbContextConfiguration(Action<DbContextOptionsBuilder> dbContextBuilderAction, string otherColumnName,
-            Func<SpecificFeatureEntity<TOtherColumn>, IFeatureContext, Task<FeatureActivationStatus>> filterSpecificFeature)
+        public SpecificDbContextConfiguration(Action<DbContextOptionsBuilder> dbContextBuilderAction,
+            string otherColumnName,
+            Func<IFeatureContext, Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>>>
+                specificFeatureFilterWithContext)
         {
-            _filterSpecificFeature = filterSpecificFeature ?? throw new ArgumentNullException(nameof(filterSpecificFeature));
+            _specificFeatureFilterWithContext = specificFeatureFilterWithContext ??
+                                                throw new ArgumentNullException(
+                                                    nameof(specificFeatureFilterWithContext));
             Schema("Feature")
                 .TableName("SpecificFeature")
                 .ApplicationColumnName("Application")
@@ -47,7 +54,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
             return _tableName;
         }
 
-        public SpecificDbContextConfiguration<TOtherColumn>  TableName(string tableName)
+        public SpecificDbContextConfiguration<TOtherColumn> TableName(string tableName)
         {
             if (!string.IsNullOrWhiteSpace(tableName))
             {
@@ -126,10 +133,10 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
             return this;
         }
 
-        internal Task<FeatureActivationStatus> FilterFeatureActivationStatusAsync(
-            SpecificFeatureEntity<TOtherColumn> specificFeatureEntity, IFeatureContext featureContext)
+        internal Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>> FilterFeatureWithScope(
+            IFeatureContext featureContext)
         {
-            return _filterSpecificFeature(specificFeatureEntity, featureContext);
+            return _specificFeatureFilterWithContext(featureContext);
         }
 
         internal void ConfigureDbContext(DbContextOptionsBuilder optionsBuilder)

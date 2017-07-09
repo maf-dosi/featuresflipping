@@ -1,6 +1,6 @@
 ﻿namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
 {
-    public class SpecificFeatureEntity<TOtherColumn>
+    public class SpecificFeatureEntity<TOtherColumn> : IFeatureEntity
     {
         public int FeatureId { get; set; }
         public string Application { get; set; }

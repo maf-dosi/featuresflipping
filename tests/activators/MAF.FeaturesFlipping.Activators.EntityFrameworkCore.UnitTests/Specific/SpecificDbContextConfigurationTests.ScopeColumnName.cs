@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific;
-using MAF.FeaturesFlipping.Extensibility.Activators;
+﻿using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific;
 using Xunit;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
@@ -20,7 +18,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
                 var expectedScopeColumnName = "NewScopeColumn";
                 var expectedFeatureColumnName = "Feature";
                 var expectedIsActiveColumnName = "IsActive";
-                var actual = new SpecificDbContextConfiguration<object>(_ => { }, "OtherColumnName", (_, __) => Task.FromResult(FeatureActivationStatus.NotSet));
+                var actual = new SpecificDbContextConfiguration<object>(_ => { }, "OtherColumnName", _ => feature => false);
 
                 // Act
                 actual.ScopeColumnName(expectedScopeColumnName);
@@ -44,7 +42,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
                 var expectedScopeColumnName = "Scope";
                 var expectedFeatureColumnName = "Feature";
                 var expectedIsActiveColumnName = "IsActive";
-                var actual = new SpecificDbContextConfiguration<object>(_ => { }, "OtherColumnName", (_, __) => Task.FromResult(FeatureActivationStatus.NotSet));
+                var actual = new SpecificDbContextConfiguration<object>(_ => { }, "OtherColumnName", _ => feature => false);
 
                 // Act
                 actual.ScopeColumnName(null);
@@ -68,7 +66,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
                 var expectedScopeColumnName = "Scope";
                 var expectedFeatureColumnName = "Feature";
                 var expectedIsActiveColumnName = "IsActive";
-                var actual = new SpecificDbContextConfiguration<object>(_ => { }, "OtherColumnName", (_, __) => Task.FromResult(FeatureActivationStatus.NotSet));
+                var actual = new SpecificDbContextConfiguration<object>(_ => { }, "OtherColumnName", _ => feature => false);
 
                 // Act
                 actual.ScopeColumnName("");
