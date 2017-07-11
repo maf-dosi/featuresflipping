@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\activators\MAF.FeaturesFlipping.Activators.Configuration\MAF.FeaturesFlipping.Activators.Configuration.csproj" />
+    <ProjectReference Include="..\MAF.FeaturesFlipping.Extensions.DependencyInjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj" />
+  </ItemGroup>
+
+</Project>

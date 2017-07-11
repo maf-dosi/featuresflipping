@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{25D7998E-82BA-4740-ADD5-86FF5A2E5B23}"
 EndProject
@@ -64,6 +64,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspnet", "aspnet", "{087E0A
 		docs\aspnet\index.md = docs\aspnet\index.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Activators.Configuration", "src\activators\MAF.FeaturesFlipping.Activators.Configuration\MAF.FeaturesFlipping.Activators.Configuration.csproj", "{EFA8175B-26B8-46DF-AE0C-C6669C5A47E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration", "src\di\MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration\MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.csproj", "{B271804C-0B8F-404E-AC95-C5F21CD7E248}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Activators.Configuration.UnitTests", "tests\activators\MAF.FeaturesFlipping.Activators.Configuration.UnitTests\MAF.FeaturesFlipping.Activators.Configuration.UnitTests.csproj", "{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "activators", "activators", "{37F031BF-EB4F-4D3A-8BA9-B25E82783ECB}"
+	ProjectSection(SolutionItems) = preProject
+		configuration.md = configuration.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +129,18 @@ Global
 		{B923E1DA-5A49-4692-8AC9-A050ED657C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B923E1DA-5A49-4692-8AC9-A050ED657C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B923E1DA-5A49-4692-8AC9-A050ED657C69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFA8175B-26B8-46DF-AE0C-C6669C5A47E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA8175B-26B8-46DF-AE0C-C6669C5A47E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA8175B-26B8-46DF-AE0C-C6669C5A47E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA8175B-26B8-46DF-AE0C-C6669C5A47E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B271804C-0B8F-404E-AC95-C5F21CD7E248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B271804C-0B8F-404E-AC95-C5F21CD7E248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B271804C-0B8F-404E-AC95-C5F21CD7E248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B271804C-0B8F-404E-AC95-C5F21CD7E248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,5 +165,9 @@ Global
 		{5EBC06E8-2BEF-44D2-8369-30E66EB107BD} = {25D7998E-82BA-4740-ADD5-86FF5A2E5B23}
 		{B923E1DA-5A49-4692-8AC9-A050ED657C69} = {5EBC06E8-2BEF-44D2-8369-30E66EB107BD}
 		{087E0A3C-3DE9-4D8A-8B1B-AA5DC7471A88} = {A8B84E74-4790-4D82-B810-CA54BF7E220B}
+		{EFA8175B-26B8-46DF-AE0C-C6669C5A47E6} = {91378479-4EF2-489D-AA0E-924E80D06C4C}
+		{B271804C-0B8F-404E-AC95-C5F21CD7E248} = {36DD66A8-5FD9-47A5-A0CC-0336493AAED2}
+		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91} = {EB0E8C89-DEB5-4DE7-9579-6EAD0C5430CE}
+		{37F031BF-EB4F-4D3A-8BA9-B25E82783ECB} = {A8B84E74-4790-4D82-B810-CA54BF7E220B}
 	EndGlobalSection
 EndGlobal
