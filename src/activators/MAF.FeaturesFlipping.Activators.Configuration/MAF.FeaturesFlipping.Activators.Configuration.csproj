@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../MAF.FeaturesFlipping.CommonAssemblyInfo.props" />
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
