@@ -14,7 +14,7 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
             _rootConfigurationSection = rootConfigurationSection ?? throw new ArgumentNullException(nameof(rootConfigurationSection));
         }
 
-        public Task<IFeature> GetFeatureAsync(IFeatureName featureName)
+        public Task<IFeature> GetFeatureAsync(FeatureName featureName)
         {
             var applicationSection = _rootConfigurationSection.GetSection(featureName.Application);
             var scopeSection = applicationSection.GetSection(featureName.Scope);

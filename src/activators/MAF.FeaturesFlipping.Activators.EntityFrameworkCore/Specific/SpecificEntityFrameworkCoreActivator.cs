@@ -13,7 +13,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
             _specificFeatureDbContext = specificFeatureDbContext;
         }
 
-        public Task<IFeature> GetFeatureAsync(IFeatureName featureName)
+        public Task<IFeature> GetFeatureAsync(FeatureName featureName)
         {
             var specificFeatureQuery = _specificFeatureDbContext.Features.Where(
                 feature => feature.Application == featureName.Application

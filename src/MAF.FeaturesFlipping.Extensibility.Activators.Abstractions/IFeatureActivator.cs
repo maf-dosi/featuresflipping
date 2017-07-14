@@ -4,6 +4,6 @@ namespace MAF.FeaturesFlipping.Extensibility.Activators
 {
     public interface IFeatureActivator
     {
-        Task<IFeature> GetFeatureAsync(IFeatureName featureName);
+        Task<IFeature> GetFeatureAsync(FeatureName featureName);
     }
 }

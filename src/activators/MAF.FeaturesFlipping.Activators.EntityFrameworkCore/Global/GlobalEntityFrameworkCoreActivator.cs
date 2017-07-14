@@ -13,7 +13,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             _globalFeatureDbContext = globalFeatureDbContext;
         }
 
-        public async Task<IFeature> GetFeatureAsync(IFeatureName featureName)
+        public async Task<IFeature> GetFeatureAsync(FeatureName featureName)
         {
             var globalFeatureEntity = await _globalFeatureDbContext.Features.FirstOrDefaultAsync(
                 feature => feature.Application == featureName.Application && feature.Scope ==
