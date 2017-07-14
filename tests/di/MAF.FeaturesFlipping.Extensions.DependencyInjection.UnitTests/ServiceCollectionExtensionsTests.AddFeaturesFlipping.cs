@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -13,6 +13,12 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests
             {
                 // Arrange
                 var serviceCollection = new ServiceCollection();
+                var expecteds = new List<ServiceDescriptor>
+                {
+                    new ServiceDescriptor(typeof(IFeatureService), typeof(FeatureService), ServiceLifetime.Scoped),
+                    new ServiceDescriptor(typeof(FeaturesFlippingOptions), new FeaturesFlippingOptions())
+                };
+                IEqualityComparer<ServiceDescriptor> comparer = new ServiceDescriptorEqualityComparer();
 
                 // Act
                 var actual = serviceCollection.AddFeaturesFlipping();
@@ -20,11 +26,11 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests
                 // Assert
                 Assert.NotNull(actual);
                 Assert.Equal(serviceCollection, actual.Services);
-                Assert.Equal(1, actual.Services.Count);
-                var serviceDescriptor = actual.Services.First();
-                Assert.Equal(typeof(IFeatureService), serviceDescriptor.ServiceType);
-                Assert.Equal(typeof(FeatureService), serviceDescriptor.ImplementationType);
-                Assert.Equal(ServiceLifetime.Scoped, serviceDescriptor.Lifetime);
+                Assert.Equal(2, actual.Services.Count);
+                foreach (var expected in expecteds)
+                {
+                    Assert.Contains(expected, actual.Services, comparer);
+                }
             }
         }
     }

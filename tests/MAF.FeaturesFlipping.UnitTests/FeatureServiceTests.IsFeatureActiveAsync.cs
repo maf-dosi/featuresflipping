@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Moq;
 using Xunit;
@@ -22,23 +25,23 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.Inactive);
                 var featureActivatorInactiveMock = new Mock<IFeatureActivator>();
                 featureActivatorInactiveMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(inactiveFeatureMock.Object);
                 var featureActivatorNeverCalledMock = new Mock<IFeatureActivator>();
                 featureActivatorNeverCalledMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .Verifiable("hould never be called after inactive");
 
                 var featureService = new FeatureService(
                     new[] { featureActivatorInactiveMock.Object, featureActivatorNeverCalledMock.Object },
-                    featureContextAccessorMock.Object);
+                    featureContextAccessorMock.Object, new FeaturesFlippingOptions());
 
                 // Act
                 var actual = featureService.IsFeatureActiveAsync(new FeatureName("", "", "")).Result;
 
                 // Assert
                 Assert.False(actual);
-                featureActivatorNeverCalledMock.Verify(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()), Times.Never);
+                featureActivatorNeverCalledMock.Verify(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()), Times.Never);
             }
             [Fact]
             public void Returns_False_When_Features_Are_Inactive_NotSet_Active()
@@ -53,7 +56,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.Inactive);
                 var featureActivatorInactiveMock = new Mock<IFeatureActivator>();
                 featureActivatorInactiveMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(inactiveFeatureMock.Object);
 
                 var notSetFeatureMock = new Mock<IFeature>();
@@ -61,7 +64,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.NotSet);
                 var featureActivatorNotSetMock = new Mock<IFeatureActivator>();
                 featureActivatorNotSetMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(notSetFeatureMock.Object);
 
                 var activeFeatureMock = new Mock<IFeature>();
@@ -69,7 +72,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.Active);
                 var featureActivatorActiveMock = new Mock<IFeatureActivator>();
                 featureActivatorActiveMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(activeFeatureMock.Object);
 
                 var featureService = new FeatureService(
@@ -78,7 +81,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                         featureActivatorInactiveMock.Object, featureActivatorNotSetMock.Object,
                         featureActivatorActiveMock.Object
                     },
-                    featureContextAccessorMock.Object);
+                    featureContextAccessorMock.Object, new FeaturesFlippingOptions());
 
                 // Act
                 var actual = featureService.IsFeatureActiveAsync(new FeatureName("", "", "")).Result;
@@ -86,6 +89,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                 // Assert
                 Assert.False(actual);
             }
+
             [Fact]
             public void Returns_False_When_No_FeatureActivators_Are_Provided()
             {
@@ -94,7 +98,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                 featureContextAccessorMock.Setup(_ => _.GetCurrentFeatureContext())
                     .Returns(() => null);
                 var featureService = new FeatureService(Enumerable.Empty<IFeatureActivator>(),
-                    featureContextAccessorMock.Object);
+                    featureContextAccessorMock.Object, new FeaturesFlippingOptions());
 
                 // Act
                 var actual = featureService.IsFeatureActiveAsync(new FeatureName("", "", "")).Result;
@@ -111,10 +115,10 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .Returns(() => null);
                 var featureActivatorMock = new Mock<IFeatureActivator>();
                 featureActivatorMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(() => null);
                 var featureService = new FeatureService(Enumerable.Repeat(featureActivatorMock.Object, 2),
-                    featureContextAccessorMock.Object);
+                    featureContextAccessorMock.Object, new FeaturesFlippingOptions());
 
                 // Act
                 var actual = featureService.IsFeatureActiveAsync(new FeatureName("", "", "")).Result;
@@ -135,7 +139,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.Active);
                 var featureActivatorActiveMock = new Mock<IFeatureActivator>();
                 featureActivatorActiveMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(activeFeatureMock.Object);
 
                 var featureService = new FeatureService(
@@ -143,7 +147,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     {
                         featureActivatorActiveMock.Object
                     },
-                    featureContextAccessorMock.Object);
+                    featureContextAccessorMock.Object, new FeaturesFlippingOptions());
 
                 // Act
                 var actual = featureService.IsFeatureActiveAsync(new FeatureName("", "", "")).Result;
@@ -164,7 +168,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.Active);
                 var featureActivatorActiveMock = new Mock<IFeatureActivator>();
                 featureActivatorActiveMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(activeFeatureMock.Object);
 
                 var notSetFeatureMock = new Mock<IFeature>();
@@ -172,7 +176,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.NotSet);
                 var featureActivatorNotSetMock = new Mock<IFeatureActivator>();
                 featureActivatorNotSetMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(notSetFeatureMock.Object);
 
                 var featureService = new FeatureService(
@@ -181,7 +185,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                         featureActivatorActiveMock.Object,
                         featureActivatorNotSetMock.Object
                     },
-                    featureContextAccessorMock.Object);
+                    featureContextAccessorMock.Object, new FeaturesFlippingOptions());
 
                 // Act
                 var actual = featureService.IsFeatureActiveAsync(new FeatureName("", "", "")).Result;
@@ -202,7 +206,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.Active);
                 var featureActivatorActiveMock = new Mock<IFeatureActivator>();
                 featureActivatorActiveMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(activeFeatureMock.Object);
 
                 var notSetFeatureMock = new Mock<IFeature>();
@@ -210,7 +214,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.NotSet);
                 var featureActivatorNotSetMock = new Mock<IFeatureActivator>();
                 featureActivatorNotSetMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(notSetFeatureMock.Object);
 
                 var featureService = new FeatureService(
@@ -219,7 +223,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                         featureActivatorNotSetMock.Object,
                         featureActivatorActiveMock.Object
                     },
-                    featureContextAccessorMock.Object);
+                    featureContextAccessorMock.Object, new FeaturesFlippingOptions());
 
                 // Act
                 var actual = featureService.IsFeatureActiveAsync(new FeatureName("", "", "")).Result;
@@ -245,7 +249,7 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.NotSet);
                 var featureActivatorNotSetMock = new Mock<IFeatureActivator>();
                 featureActivatorNotSetMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(notSetFeatureMock.Object);
 
                 var activeFeatureMock = new Mock<IFeature>();
@@ -253,14 +257,14 @@ namespace MAF.FeaturesFlipping.UnitTests
                     .ReturnsAsync(FeatureActivationStatus.Active);
                 var featureActivatorActiveMock = new Mock<IFeatureActivator>();
                 featureActivatorActiveMock
-                    .Setup(_ => _.GetFeatureAsync(It.IsAny<IFeatureName>()))
+                    .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
                     .ReturnsAsync(activeFeatureMock.Object);
                 var featureService = new FeatureService(
                     new[]
                     {
                         featureActivatorNotSetMock.Object,
                         featureActivatorActiveMock.Object
-                    }, featureContextAccessorMock.Object);
+                    }, featureContextAccessorMock.Object, new FeaturesFlippingOptions());
 
                 // Act
                 var actual = await featureService.IsFeatureActiveAsync(new FeatureName("", "", ""));
@@ -270,6 +274,40 @@ namespace MAF.FeaturesFlipping.UnitTests
 
                 featureContextAccessorMock.Verify(_ => _.GetCurrentFeatureContext(), Times.Once);
                 featureContextAccessorMock.Verify(_ => _.DisposeFeatureContext(featureContextMock.Object), Times.Once);
+            }
+
+
+            [Fact]
+            public void Returns_False_When_No_FeatureActivators_Are_Provided2()
+            {
+                // Arrange
+                var featureContextAccessorMock = new Mock<IFeatureContextAccessor>();
+                featureContextAccessorMock.Setup(_ => _.GetCurrentFeatureContext())
+                    .Returns(() => null);
+                var fn = new FeatureName("", "", "");
+                var fn2 = new FeatureName("A", "", "");
+                var fam = new Mock<IFeatureActivator>();
+                var fm = new Mock<IFeature>();
+                fm.Setup(_ => _.GetStatusAsync(It.IsAny<IFeatureContext>()))
+                    .Returns(Task.FromResult(FeatureActivationStatus.Active));
+                fam.Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureName>()))
+                    .Returns(() =>
+                    {
+                        Thread.Sleep(TimeSpan.FromSeconds(5));
+                        return Task.FromResult(fm.Object);
+                    });
+                var fs = new FeatureService(new[] { fam.Object }, featureContextAccessorMock.Object, new FeaturesFlippingOptions
+                {
+                    ReadFeatureLockTimeout = TimeSpan.FromSeconds(3),
+                    WriteFeatureLockTimeout = TimeSpan.FromSeconds(3)
+                });
+                var f1 = Task.Factory.StartNew(() =>
+                    fs.IsFeatureActiveAsync(fn));
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+                var f2 = Task.Factory.StartNew(() => fs.IsFeatureActiveAsync(fn2));
+
+                Assert.True(f1.Result.Result);
+                Assert.False(f2.Result.Result);
             }
         }
     }
