@@ -4,6 +4,6 @@ namespace MAF.FeaturesFlipping
 {
     public interface IFeatureService
     {
-        Task<bool> IsFeatureActiveAsync(IFeatureName featureName);
+        Task<bool> IsFeatureActiveAsync(FeatureName featureName);
     }
 }

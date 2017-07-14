@@ -30,12 +30,12 @@ namespace MAF.FeaturesFlipping.AspNetCore
         private class FeatureResourceFilter : IAsyncResourceFilter
         {
             private readonly IFeatureService _featureService;
-            private readonly IFeatureName _featureName;
+            private readonly FeatureName _featureName;
 
-            public FeatureResourceFilter(IFeatureService featureService, IFeatureName featureName)
+            public FeatureResourceFilter(IFeatureService featureService, FeatureName featureName)
             {
                 _featureService = featureService ?? throw new ArgumentNullException(nameof(featureService));
-                _featureName = featureName ?? throw new ArgumentNullException(nameof(featureName));
+                _featureName = featureName;
             }
 
             public async Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next)

@@ -6,6 +6,8 @@ namespace MAF.FeaturesFlipping
 {
     public sealed class FeatureService : IFeatureService
     {
+        private readonly Dictionary<FeatureName, bool> _featureActivationResultCache =
+            new Dictionary<FeatureName, bool>();
         private readonly IEnumerable<IFeatureActivator> _featureActivators;
         private readonly IFeatureContextAccessor _featureContextAccessor;
 
@@ -16,24 +18,40 @@ namespace MAF.FeaturesFlipping
             _featureContextAccessor = featureContextAccessor;
         }
 
-        public async Task<bool> IsFeatureActiveAsync(IFeatureName featureName)
+        public async Task<bool> IsFeatureActiveAsync(FeatureName featureName)
+        {
+            if (!_featureActivationResultCache.ContainsKey(featureName))
+            {
+                var isFeatureActive = await ComputeIsFeatureActiveAsync(featureName);
+                _featureActivationResultCache.Add(featureName, isFeatureActive);
+            }
+            return _featureActivationResultCache.TryGetValue(featureName, out var result) && result;
+        }
+
+        private async Task<bool> ComputeIsFeatureActiveAsync(FeatureName featureName)
         {
             var featureContext = _featureContextAccessor.GetCurrentFeatureContext();
             var isFeatureActive = false;
-            foreach (var featureActivator in _featureActivators)
+            try
             {
-                var feature = await featureActivator.GetFeatureAsync(featureName) ?? NotSetFeature.Instance;
-                var featureActivationStatus = await feature.GetStatusAsync(featureContext);
-                switch (featureActivationStatus)
+                foreach (var featureActivator in _featureActivators)
                 {
-                    case FeatureActivationStatus.Inactive:
-                        return false;
-                    case FeatureActivationStatus.Active:
-                        isFeatureActive = true;
-                        break;
+                    var feature = await featureActivator.GetFeatureAsync(featureName) ?? NotSetFeature.Instance;
+                    var featureActivationStatus = await feature.GetStatusAsync(featureContext);
+                    switch (featureActivationStatus)
+                    {
+                        case FeatureActivationStatus.Inactive:
+                            return false;
+                        case FeatureActivationStatus.Active:
+                            isFeatureActive = true;
+                            break;
+                    }
                 }
             }
-            _featureContextAccessor.DisposeFeatureContext(featureContext);
+            finally
+            {
+                _featureContextAccessor.DisposeFeatureContext(featureContext);
+            }
             return isFeatureActive;
         }
     }
