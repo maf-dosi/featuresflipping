@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		src\MAF.FeaturesFlipping.CommonAssemblyInfo.props = src\MAF.FeaturesFlipping.CommonAssemblyInfo.props
 		MAF.FeaturesFlipping.runsettings = MAF.FeaturesFlipping.runsettings
+		MAF.FeaturesFlipping.sln.DotSettings = MAF.FeaturesFlipping.sln.DotSettings
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -74,6 +75,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "activators", "activators", 
 	ProjectSection(SolutionItems) = preProject
 		configuration.md = configuration.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.UnitTests", "tests\di\MAF.FF.Extensions.DI.Configuration.UnitTests\MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.UnitTests.csproj", "{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +144,10 @@ Global
 		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -169,5 +176,6 @@ Global
 		{B271804C-0B8F-404E-AC95-C5F21CD7E248} = {36DD66A8-5FD9-47A5-A0CC-0336493AAED2}
 		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91} = {EB0E8C89-DEB5-4DE7-9579-6EAD0C5430CE}
 		{37F031BF-EB4F-4D3A-8BA9-B25E82783ECB} = {A8B84E74-4790-4D82-B810-CA54BF7E220B}
+		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8} = {6F37E2FD-3C17-4FDE-A605-116E9BE2F800}
 	EndGlobalSection
 EndGlobal

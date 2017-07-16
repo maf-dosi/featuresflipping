@@ -9,6 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IFeaturesFlippingBuilder AddFeaturesFlipping(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IFeatureService, FeatureService>();
+            serviceCollection.AddScoped<IFeatureContextAccessor, FeatureContextAccessor>();
             
             var featureFlippingBuilder = new FeaturesFlippingBuilder(serviceCollection);
             return featureFlippingBuilder;
