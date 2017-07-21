@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\activators\MAF.FeaturesFlipping.Activators.EntityFrameworkCore\MAF.FeaturesFlipping.Activators.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\MAF.FeaturesFlipping.Extensions.DependencyInjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\activators\efcore\MAF.FeaturesFlipping.Activators.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\dependencyinjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>
