@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../MAF.FeaturesFlipping.CommonAssemblyInfo.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\activators\configuration\MAF.FeaturesFlipping.Activators.Configuration.csproj" />
+    <ProjectReference Include="..\dependencyinjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj" />
+  </ItemGroup>
+
+</Project>

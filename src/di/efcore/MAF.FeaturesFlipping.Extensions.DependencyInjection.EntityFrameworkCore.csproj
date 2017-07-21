@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../MAF.FeaturesFlipping.CommonAssemblyInfo.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\activators\efcore\MAF.FeaturesFlipping.Activators.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\dependencyinjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj" />
+  </ItemGroup>
+
+</Project>

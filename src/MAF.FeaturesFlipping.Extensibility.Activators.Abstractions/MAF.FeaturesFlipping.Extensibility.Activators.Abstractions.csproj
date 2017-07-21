@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../MAF.FeaturesFlipping.CommonAssemblyInfo.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <RootNamespace>MAF.FeaturesFlipping.Extensibility.Activators</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MAF.FeaturesFlipping.Abstractions\MAF.FeaturesFlipping.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

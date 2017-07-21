@@ -1,0 +1,20 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <Optimize>True</Optimize>
+    <DebugSymbols>True</DebugSymbols>
+    <Version>0.2.0</Version>
+    <Authors>MAF-DOSI</Authors>
+    <Company>MAF-DOSI</Company>
+    <Description>MAF implementation of Features flipping</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+</Project>
