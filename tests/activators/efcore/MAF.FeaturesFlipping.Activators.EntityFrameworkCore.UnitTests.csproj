@@ -2,18 +2,23 @@
 
   <PropertyGroup>
     <TargetFrameworks>net461;netcoreapp1.1</TargetFrameworks>
+    <AssemblyName>MAF.FF.A.EFCore.UnitTests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="1.0.0" />
     <PackageReference Include="xunit" Version="2.3.0-beta3-build3705" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0-beta3-build3705" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta2-build3683" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\activators\MAF.FeaturesFlipping.Activators.Configuration\MAF.FeaturesFlipping.Activators.Configuration.csproj" />
+    <ProjectReference Include="..\..\..\src\activators\efcore\MAF.FeaturesFlipping.Activators.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\..\src\MAF.FeaturesFlipping\MAF.FeaturesFlipping.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 
 </Project>

@@ -24,8 +24,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\di\MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration\MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.csproj" />
-    <ProjectReference Include="..\..\..\src\di\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\..\src\di\configuration\MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.csproj" />
+    <ProjectReference Include="..\..\..\src\di\efcore\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

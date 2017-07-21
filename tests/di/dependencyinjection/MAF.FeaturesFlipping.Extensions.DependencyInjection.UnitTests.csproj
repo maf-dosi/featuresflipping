@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\di\MAF.FeaturesFlipping.Extensions.DependencyInjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\..\src\di\dependencyinjection\MAF.FeaturesFlipping.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
 
   <ItemGroup>
