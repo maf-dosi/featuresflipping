@@ -8,14 +8,14 @@ using Microsoft.Extensions.DependencyInjection;
 // ReSharper disable once CheckNamespace
 namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
 {
-    public static class FeaturesFlippingBuilderExtensions
+    public static class FeaturesFlippingBuilderGlobalEFCoreExtensions
     {
-        public static void AddGlobalEntityFrameworkCoreActivator(this IFeaturesFlippingBuilder featureFlippingBuilder,
+        public static IFeaturesFlippingBuilder AddGlobalEntityFrameworkCoreActivator(this IFeaturesFlippingBuilder featureFlippingBuilder,
             Action<DbContextOptionsBuilder> dbContextBuilderAction)
         {
-            featureFlippingBuilder.AddGlobalEntityFrameworkCoreActivator(dbContextBuilderAction, _ =>{});
+            return featureFlippingBuilder.AddGlobalEntityFrameworkCoreActivator(dbContextBuilderAction, _ =>{});
         }
-        public static void AddGlobalEntityFrameworkCoreActivator(this IFeaturesFlippingBuilder featureFlippingBuilder,
+        public static IFeaturesFlippingBuilder AddGlobalEntityFrameworkCoreActivator(this IFeaturesFlippingBuilder featureFlippingBuilder,
             Action<DbContextOptionsBuilder> dbContextBuilderAction, Action<GlobalDbContextConfiguration> globalDbContextConfigurer)
         {
             featureFlippingBuilder.Services.AddScoped<IFeatureActivator, GlobalEntityFrameworkCoreActivator>();
@@ -25,7 +25,7 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
             var globalDbContextConfiguration = new GlobalDbContextConfiguration(dbContextBuilderAction);
             globalDbContextConfigurer(globalDbContextConfiguration);
             featureFlippingBuilder.Services.AddSingleton(globalDbContextConfiguration);
-
+            return featureFlippingBuilder;
         }
     }
 }

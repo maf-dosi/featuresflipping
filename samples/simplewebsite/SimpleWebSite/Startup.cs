@@ -1,4 +1,5 @@
-﻿using MAF.FeaturesFlipping.Extensions.DependencyInjection;
+﻿using MAF.FeaturesFlipping;
+using MAF.FeaturesFlipping.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -46,7 +47,18 @@ namespace SimpleWebSite
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async context => { await context.Response.WriteAsync("Hello World!"); });
+            app.Run(async context =>
+            {
+                var featureService = context.RequestServices.GetService<IFeatureService>();
+                if (await featureService.IsFeatureActiveAsync(new FeatureName("", "", "")))
+                {
+                    await context.Response.WriteAsync("Hello World!");
+                }
+                else
+                {
+                    await context.Response.WriteAsync("Not Hello World!");
+                }
+            });
         }
     }
 }

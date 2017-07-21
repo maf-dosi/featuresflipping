@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 // ReSharper disable once CheckNamespace
 namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
 {
-    public static class FeaturesFlippingBuilderSpecificExtensions
+    public static class FeaturesFlippingBuilderSpecificEFCoreExtensions
     {
         public static IFeaturesFlippingBuilder AddSpecificEntityFrameworkCoreActivator<TOtherColumn>(this IFeaturesFlippingBuilder featureFlippingBuilder, 
             Action<DbContextOptionsBuilder> dbContextBuilderAction, string otherColumnName,

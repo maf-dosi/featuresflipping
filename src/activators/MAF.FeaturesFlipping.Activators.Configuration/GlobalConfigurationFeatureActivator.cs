@@ -7,16 +7,17 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
 {
     public class GlobalConfigurationFeatureActivator : IFeatureActivator
     {
-        private readonly IConfigurationSection _rootConfigurationSection;
-
         public GlobalConfigurationFeatureActivator(IConfigurationSection rootConfigurationSection)
         {
-            _rootConfigurationSection = rootConfigurationSection ?? throw new ArgumentNullException(nameof(rootConfigurationSection));
+            ConfigurationSection = rootConfigurationSection ??
+                                   throw new ArgumentNullException(nameof(rootConfigurationSection));
         }
+
+        internal IConfigurationSection ConfigurationSection { get; }
 
         public Task<IFeature> GetFeatureAsync(FeatureName featureName)
         {
-            var applicationSection = _rootConfigurationSection.GetSection(featureName.Application);
+            var applicationSection = ConfigurationSection.GetSection(featureName.Application);
             var scopeSection = applicationSection.GetSection(featureName.Scope);
             var featureSection = scopeSection.GetSection(featureName.Feature);
             var globalConfigurationFeature = new GlobalConfigurationFeature(featureSection);
