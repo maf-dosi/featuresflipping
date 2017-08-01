@@ -78,6 +78,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "activators", "activators", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.UnitTests", "tests\di\configuration\MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.UnitTests.csproj", "{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspnet", "aspnet", "{951E27E9-6F04-4801-8E85-E7C75BBB2000}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.AspNetCore.UnitTests", "tests\aspnet\aspnetcore\MAF.FeaturesFlipping.AspNetCore.UnitTests.csproj", "{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,6 +152,10 @@ Global
 		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,5 +185,7 @@ Global
 		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91} = {EB0E8C89-DEB5-4DE7-9579-6EAD0C5430CE}
 		{37F031BF-EB4F-4D3A-8BA9-B25E82783ECB} = {A8B84E74-4790-4D82-B810-CA54BF7E220B}
 		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8} = {6F37E2FD-3C17-4FDE-A605-116E9BE2F800}
+		{951E27E9-6F04-4801-8E85-E7C75BBB2000} = {2FBA5A4A-35D2-4A34-9870-26E5FD6C33C6}
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29} = {951E27E9-6F04-4801-8E85-E7C75BBB2000}
 	EndGlobalSection
 EndGlobal
