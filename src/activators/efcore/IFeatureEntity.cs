@@ -4,7 +4,7 @@
     {
         string Application { get; set; }
         string Scope { get; set; }
-        string Feature { get; set; }
+        string FeatureName { get; set; }
         bool? IsActive { get; set; }
     }
 }

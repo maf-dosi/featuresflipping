@@ -13,11 +13,11 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             _globalFeatureDbContext = globalFeatureDbContext;
         }
 
-        public async Task<IFeature> GetFeatureAsync(FeatureName featureName)
+        public async Task<IFeature> GetFeatureAsync(FeatureSpec featureSpec)
         {
             var globalFeatureEntity = await _globalFeatureDbContext.Features.FirstOrDefaultAsync(
-                feature => feature.Application == featureName.Application && feature.Scope ==
-                           featureName.Scope && feature.Feature == featureName.Feature);
+                feature => feature.Application == featureSpec.Application && feature.Scope ==
+                           featureSpec.Scope && feature.FeatureName == featureSpec.FeatureName);
             var featureFromEntity = new FeatureFromEntity(globalFeatureEntity);
             return featureFromEntity;
         }

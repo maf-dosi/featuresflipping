@@ -7,7 +7,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
     {
         private readonly Action<DbContextOptionsBuilder> _dbContextBuilderAction;
         private string _applicationColumnName;
-        private string _featureColumnName;
+        private string _featureNameColumnName;
         private string _isActiveColumnName;
         private string _schema;
         private string _scopeColumnName;
@@ -19,7 +19,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
                 .TableName("GlobalFeature")
                 .ApplicationColumnName("Application")
                 .ScopeColumnName("Scope")
-                .FeatureColumnName("Feature")
+                .FeatureNameColumnName("FeatureName")
                 .IsActiveColumnName("IsActive");
             _dbContextBuilderAction = dbContextBuilderAction ?? (_ => { });
         }
@@ -77,16 +77,16 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             return this;
         }
 
-        public string FeatureColumnName()
+        public string FeatureNameColumnName()
         {
-            return _featureColumnName;
+            return _featureNameColumnName;
         }
 
-        public GlobalDbContextConfiguration FeatureColumnName(string featureColumnName)
+        public GlobalDbContextConfiguration FeatureNameColumnName(string featureNameColumnName)
         {
-            if (!string.IsNullOrWhiteSpace(featureColumnName))
+            if (!string.IsNullOrWhiteSpace(featureNameColumnName))
             {
-                _featureColumnName = featureColumnName;
+                _featureNameColumnName = featureNameColumnName;
             }
             return this;
         }

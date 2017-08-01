@@ -14,7 +14,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
             var expectedTableName = "SpecificFeature";
             var expectedApplicationColumnName = "Application";
             var expectedScopeColumnName = "Scope";
-            var expectedFeatureColumnName = "Feature";
+            var expectedFeatureNameColumnName = "FeatureName";
             var expectedIsActiveColumnName = "IsActive";
             var expectedOtherColumnName = "Other";
 
@@ -26,7 +26,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
             Assert.Equal(expectedTableName, actual.TableName());
             Assert.Equal(expectedApplicationColumnName, actual.ApplicationColumnName());
             Assert.Equal(expectedScopeColumnName, actual.ScopeColumnName());
-            Assert.Equal(expectedFeatureColumnName, actual.FeatureColumnName());
+            Assert.Equal(expectedFeatureNameColumnName, actual.FeatureNameColumnName());
             Assert.Equal(expectedIsActiveColumnName, actual.IsActiveColumnName());
             Assert.Equal(expectedOtherColumnName, actual.OtherColumnName());
         }

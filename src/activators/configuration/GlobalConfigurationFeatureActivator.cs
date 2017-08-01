@@ -15,11 +15,11 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
 
         internal IConfigurationSection ConfigurationSection { get; }
 
-        public Task<IFeature> GetFeatureAsync(FeatureName featureName)
+        public Task<IFeature> GetFeatureAsync(FeatureSpec featureSpec)
         {
-            var applicationSection = ConfigurationSection.GetSection(featureName.Application);
-            var scopeSection = applicationSection.GetSection(featureName.Scope);
-            var featureSection = scopeSection.GetSection(featureName.Feature);
+            var applicationSection = ConfigurationSection.GetSection(featureSpec.Application);
+            var scopeSection = applicationSection.GetSection(featureSpec.Scope);
+            var featureSection = scopeSection.GetSection(featureSpec.FeatureName);
             var globalConfigurationFeature = new GlobalConfigurationFeature(featureSection);
             return Task.FromResult<IFeature>(globalConfigurationFeature);
         }

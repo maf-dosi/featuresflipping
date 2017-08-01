@@ -32,8 +32,8 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
                 .IsRequired().HasColumnName(_globalDbContextConfigurer.ApplicationColumnName());
             featureEntityModelBuilder.Property(_ => _.Scope)
                 .IsRequired().HasColumnName(_globalDbContextConfigurer.ScopeColumnName());
-            featureEntityModelBuilder.Property(_ => _.Feature)
-                .IsRequired().HasColumnName(_globalDbContextConfigurer.FeatureColumnName());
+            featureEntityModelBuilder.Property(_ => _.FeatureName)
+                .IsRequired().HasColumnName(_globalDbContextConfigurer.FeatureNameColumnName());
             featureEntityModelBuilder.Property(_ => _.IsActive)
                 .HasColumnName(_globalDbContextConfigurer.IsActiveColumnName());
         }

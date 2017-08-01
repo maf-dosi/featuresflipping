@@ -45,7 +45,7 @@ namespace MAF.FeaturesFlipping.AspNetCore.UnitTests
                 var context = MakeTagHelperContext();
                 var output = MakeTagHelperOutput("feature", childContent: childContent);
                 var featureServiceMock = new Mock<IFeatureService>();
-                featureServiceMock.Setup(_ => _.IsFeatureActiveAsync(It.IsAny<FeatureName>()))
+                featureServiceMock.Setup(_ => _.IsFeatureActiveAsync(It.IsAny<FeatureSpec>()))
                     .ReturnsAsync(false);
                 var tagHelper = new FeatureTagHelper(featureServiceMock.Object);
 
@@ -68,7 +68,7 @@ namespace MAF.FeaturesFlipping.AspNetCore.UnitTests
                 var context = MakeTagHelperContext();
                 var output = MakeTagHelperOutput("feature", childContent: childContent);
                 var featureServiceMock = new Mock<IFeatureService>();
-                featureServiceMock.Setup(_ => _.IsFeatureActiveAsync(It.IsAny<FeatureName>()))
+                featureServiceMock.Setup(_ => _.IsFeatureActiveAsync(It.IsAny<FeatureSpec>()))
                     .ReturnsAsync(true);
                 var tagHelper = new FeatureTagHelper(featureServiceMock.Object);
 
