@@ -1,0 +1,12 @@
+﻿@using MAF.FeaturesFlipping
+@{
+    var feature = new FeatureName("App1", "Scope1", "Feature1");
+}
+<div>
+    <feature application="App1" scope="Scope1" feature-name="Feature1">
+        <p>App1;Scope;Feature</p>
+    </feature> 
+    <feature feature="feature" inverse="true">
+        <p>not(App1;Scope1;Feature1)</p>
+    </feature> 
+</div>
