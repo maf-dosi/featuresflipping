@@ -24,6 +24,7 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\aspnet\aspnetcore\MAF.FeaturesFlipping.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\src\di\configuration\MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.csproj" />
     <ProjectReference Include="..\..\..\src\di\efcore\MAF.FeaturesFlipping.Extensions.DependencyInjection.EntityFrameworkCore.csproj" />
   </ItemGroup>
