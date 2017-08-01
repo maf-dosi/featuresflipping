@@ -9,3 +9,8 @@ Install-Package MAF.FeaturesFlipping.AspNetCore
 3. Add the attribute `[MAF.FeaturesFlipping.AspNetCore.FeatureFilterAttribute]` to the action you want to put behind a feature.
 
 If the feature is inactive the action will not be found
+
+
+#
+#
+Try the [Feature Tag Helper](feature-tag-helper.md).
