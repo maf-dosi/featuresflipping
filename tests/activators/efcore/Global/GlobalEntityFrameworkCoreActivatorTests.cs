@@ -21,7 +21,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 {
                     Application = "App" + i,
                     Scope = "Scope" + i,
-                    Feature = "Feature" + i,
+                    FeatureName = "FeatureName" + i,
                     IsActive = i % 3 == 0
                 }));
             context.SaveChanges();

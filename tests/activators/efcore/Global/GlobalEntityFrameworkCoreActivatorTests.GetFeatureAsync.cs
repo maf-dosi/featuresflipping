@@ -19,7 +19,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var activator = new GlobalEntityFrameworkCoreActivator(context);
 
                 // Act
-                var feature = await activator.GetFeatureAsync(new FeatureName("", "", ""));
+                var feature = await activator.GetFeatureAsync(new FeatureSpec("", "", ""));
 
                 // Assert
                 Assert.NotNull(feature);
@@ -37,7 +37,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var activator = new GlobalEntityFrameworkCoreActivator(context);
 
                 // Act
-                var feature = await activator.GetFeatureAsync(new FeatureName("App3", "Scope3", "Feature3"));
+                var feature = await activator.GetFeatureAsync(new FeatureSpec("App3", "Scope3", "FeatureName3"));
 
                 // Assert
                 Assert.NotNull(feature);

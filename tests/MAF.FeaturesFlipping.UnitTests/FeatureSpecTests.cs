@@ -4,7 +4,7 @@ using Xunit;
 namespace MAF.FeaturesFlipping.UnitTests
 {
     [Trait("Category", "UnitTest")]
-    public class FeatureNameTests
+    public class FeatureSpecTests
     {
         [Fact]
         public void The_Constructor_Correctly_Sets_The_Properties()
@@ -15,12 +15,12 @@ namespace MAF.FeaturesFlipping.UnitTests
             var expectedFeature = "Feature" + Guid.NewGuid();
 
             // Act
-            var actual = new FeatureName(expectedApplication, expectedScope, expectedFeature);
+            var actual = new FeatureSpec(expectedApplication, expectedScope, expectedFeature);
 
             // Assert
             Assert.Equal(expectedApplication, actual.Application);
             Assert.Equal(expectedScope, actual.Scope);
-            Assert.Equal(expectedFeature, actual.Feature);
+            Assert.Equal(expectedFeature, actual.FeatureName);
         }
     }
 }

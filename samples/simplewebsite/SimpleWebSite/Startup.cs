@@ -53,7 +53,7 @@ namespace SimpleWebSite
             app.Run(async context =>
             {
                 var featureService = context.RequestServices.GetService<IFeatureService>();
-                if (await featureService.IsFeatureActiveAsync(new FeatureName("", "", "")))
+                if (await featureService.IsFeatureActiveAsync(new FeatureSpec("", "", "")))
                 {
                     await context.Response.WriteAsync("Hello World!");
                 }

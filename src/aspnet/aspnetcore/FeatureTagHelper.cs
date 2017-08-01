@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace MAF.FeaturesFlipping.AspNetCore
 {
-    [HtmlTargetElement(FeatureTagName, Attributes = FeatureAttributeName)]
+    [HtmlTargetElement(FeatureTagName, Attributes = FeatureSpecAttributeName)]
     [HtmlTargetElement(FeatureTagName, Attributes = ApplicationAttributeName)]
     [HtmlTargetElement(FeatureTagName, Attributes = ScopeAttributeName)]
     [HtmlTargetElement(FeatureTagName, Attributes = FeatureNameAttributeName)]
@@ -15,9 +15,9 @@ namespace MAF.FeaturesFlipping.AspNetCore
 
         private const string FeatureTagName = "feature";
 
-        private const string FeatureAttributeName = "feature";
-        [HtmlAttributeName(FeatureAttributeName)]
-        public FeatureName Feature { get; set; }
+        private const string FeatureSpecAttributeName = "feature-spec";
+        [HtmlAttributeName(FeatureSpecAttributeName)]
+        public FeatureSpec FeatureSpec { get; set; }
 
         private const string ApplicationAttributeName = "application";
         [HtmlAttributeName(ApplicationAttributeName)]
@@ -54,8 +54,8 @@ namespace MAF.FeaturesFlipping.AspNetCore
             
             output.TagName = null;
 
-            var featureName = GetFeatureToEvaluate();
-            var isFeatureActive = await _featureService.IsFeatureActiveAsync(featureName);
+            var featureSpec = GetFeatureSpecToEvaluate();
+            var isFeatureActive = await _featureService.IsFeatureActiveAsync(featureSpec);
             var suppressOutput = ShouldSuppressOutput(isFeatureActive);
 
             if (suppressOutput)
@@ -69,12 +69,12 @@ namespace MAF.FeaturesFlipping.AspNetCore
             return !(isFeatureActive ^ Inverse);
         }
 
-        internal FeatureName GetFeatureToEvaluate()
+        internal FeatureSpec GetFeatureSpecToEvaluate()
         {
-            var featureName = Feature.Equals(default(FeatureName))
-                ? new FeatureName(Application, Scope, FeatureName)
-                : Feature;
-            return featureName;
+            var featureSpec = FeatureSpec.Equals(default(FeatureSpec))
+                ? new FeatureSpec(Application, Scope, FeatureName)
+                : FeatureSpec;
+            return featureSpec;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var expectedTableName = "GlobalFeature";
                 var expectedApplicationColumnName = "NewApplicationColumn";
                 var expectedScopeColumnName = "Scope";
-                var expectedFeatureColumnName = "Feature";
+                var expectedFeatureNameColumnName = "FeatureName";
                 var expectedIsActiveColumnName = "IsActive";
                 var actual = new GlobalDbContextConfiguration(_ => { });
 
@@ -28,7 +28,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 Assert.Equal(expectedTableName, actual.TableName());
                 Assert.Equal(expectedApplicationColumnName, actual.ApplicationColumnName());
                 Assert.Equal(expectedScopeColumnName, actual.ScopeColumnName());
-                Assert.Equal(expectedFeatureColumnName, actual.FeatureColumnName());
+                Assert.Equal(expectedFeatureNameColumnName, actual.FeatureNameColumnName());
                 Assert.Equal(expectedIsActiveColumnName, actual.IsActiveColumnName());
             }
 
@@ -40,7 +40,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var expectedTableName = "GlobalFeature";
                 var expectedApplicationColumnName = "Application";
                 var expectedScopeColumnName = "Scope";
-                var expectedFeatureColumnName = "Feature";
+                var expectedFeatureNameColumnName = "FeatureName";
                 var expectedIsActiveColumnName = "IsActive";
                 var actual = new GlobalDbContextConfiguration(_ => { });
 
@@ -52,7 +52,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 Assert.Equal(expectedTableName, actual.TableName());
                 Assert.Equal(expectedApplicationColumnName, actual.ApplicationColumnName());
                 Assert.Equal(expectedScopeColumnName, actual.ScopeColumnName());
-                Assert.Equal(expectedFeatureColumnName, actual.FeatureColumnName());
+                Assert.Equal(expectedFeatureNameColumnName, actual.FeatureNameColumnName());
                 Assert.Equal(expectedIsActiveColumnName, actual.IsActiveColumnName());
             }
 
@@ -64,7 +64,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 var expectedTableName = "GlobalFeature";
                 var expectedApplicationColumnName = "Application";
                 var expectedScopeColumnName = "Scope";
-                var expectedFeatureColumnName = "Feature";
+                var expectedFeatureNameColumnName = "FeatureName";
                 var expectedIsActiveColumnName = "IsActive";
                 var actual = new GlobalDbContextConfiguration(_ => { });
 
@@ -76,7 +76,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Global
                 Assert.Equal(expectedTableName, actual.TableName());
                 Assert.Equal(expectedApplicationColumnName, actual.ApplicationColumnName());
                 Assert.Equal(expectedScopeColumnName, actual.ScopeColumnName());
-                Assert.Equal(expectedFeatureColumnName, actual.FeatureColumnName());
+                Assert.Equal(expectedFeatureNameColumnName, actual.FeatureNameColumnName());
                 Assert.Equal(expectedIsActiveColumnName, actual.IsActiveColumnName());
             }
         }
