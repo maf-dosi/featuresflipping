@@ -4,15 +4,22 @@ namespace MAF.FeaturesFlipping
 {
     public struct FeatureName
     {
+        private readonly string _application;
+        private readonly string _scope;
+        private readonly string _feature;
+
         public FeatureName(string application, string scope, string feature)
         {
-            Application = application ?? string.Empty;
-            Scope = scope ?? string.Empty;
-            Feature = feature ?? string.Empty;
+            _application = application;
+            _scope = scope;
+            _feature = feature;
         }
-        public string Application { get; }
-        public string Scope { get; }
-        public string Feature { get; }
+
+        public string Application => _application ?? string.Empty;
+
+        public string Scope => _scope ?? string.Empty;
+
+        public string Feature => _feature ?? string.Empty;
 
         public override int GetHashCode()
         {
