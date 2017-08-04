@@ -1,10 +1,11 @@
+using System;
+using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 
 namespace MAF.FeaturesFlipping
 {
-    public interface IFeatureContextAccessor
+    public interface IFeatureContextAccessor : IDisposable
     {
-        IFeatureContext GetCurrentFeatureContext();
-        void DisposeFeatureContext(IFeatureContext featureContext);
+        Task<IFeatureContext> GetCurrentFeatureContextAsync();
     }
 }
