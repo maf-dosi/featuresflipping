@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 
 namespace MAF.FeaturesFlipping
@@ -6,6 +7,13 @@ namespace MAF.FeaturesFlipping
     internal class FeatureContext : IFeatureContext
     {
         private readonly Dictionary<string, object> _contextParts = new Dictionary<string, object>();
+
+        public FeatureContext(IServiceProvider featuresServices)
+        {
+            FeaturesServices = featuresServices;
+        }
+
+        public IServiceProvider FeaturesServices { get; }
 
         public T GetPart<T>(string partName)
         {
