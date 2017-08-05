@@ -9,12 +9,14 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
 {
     public partial class SpecificEntityFrameworkCoreActivatorTests
     {
-        private static SpecificFeatureDbContext<TOtherColumn> CreateNewContext<TOtherColumn>(string databaseName, string otherColumnName,
+        private static (SpecificFeatureDbContext<TOtherColumn> Context, SpecificDbContextConfiguration<TOtherColumn> Configuration) CreateNewContext<TOtherColumn>(string databaseName, string otherColumnName,
             Func<IFeatureContext, Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>>> specificFeatureFilterWithContext)
         {
-            var context = new SpecificFeatureDbContext<TOtherColumn>(new SpecificDbContextConfiguration<TOtherColumn>(
-                builder => builder.UseInMemoryDatabase(databaseName), otherColumnName, specificFeatureFilterWithContext));
-            return context;
+            var configuration = new SpecificDbContextConfiguration<TOtherColumn>(
+                builder => builder.UseInMemoryDatabase(databaseName), otherColumnName,
+                specificFeatureFilterWithContext);
+            var context = new SpecificFeatureDbContext<TOtherColumn>(configuration);
+            return (context, configuration);
         }
 
         private static void PopulateContext(SpecificFeatureDbContext<string> context)
@@ -32,12 +34,12 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
             context.SaveChanges();
         }
 
-        private static SpecificFeatureDbContext<string> PopulateNewContext(string databaseName, string otherColumnName,
+        private static (SpecificFeatureDbContext<string> Context, SpecificDbContextConfiguration<string> Configuration) PopulateNewContext(string databaseName, string otherColumnName,
             Func<IFeatureContext, Expression<Func<SpecificFeatureEntity<string>, bool>>> specificFeatureFilterWithContext)
         {
-            var context = CreateNewContext(databaseName, otherColumnName, specificFeatureFilterWithContext);
-            PopulateContext(context);
-            return context;
+            var contextAndConfiguration = CreateNewContext(databaseName, otherColumnName, specificFeatureFilterWithContext);
+            PopulateContext(contextAndConfiguration.Context);
+            return contextAndConfiguration;
         }
     }
 }
