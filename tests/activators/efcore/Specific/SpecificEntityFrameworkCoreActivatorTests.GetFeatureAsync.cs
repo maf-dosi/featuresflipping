@@ -24,9 +24,9 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
                 var activator = new SpecificEntityFrameworkCoreActivator<string>(context);
 
                 // Act
-                var actualFeature = await activator.GetFeatureAsync(new FeatureName(otherColumnValue.Replace("OtherColumn", "App"),
+                var actualFeature = await activator.GetFeatureAsync(new FeatureSpec(otherColumnValue.Replace("OtherColumn", "App"),
                     otherColumnValue.Replace("OtherColumn", "Scope"),
-                    otherColumnValue.Replace("OtherColumn", "Feature")));
+                    otherColumnValue.Replace("OtherColumn", "FeatureName")));
 
                 // Assert
                 Assert.NotNull(actualFeature);

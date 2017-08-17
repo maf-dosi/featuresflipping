@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{25D7998E-82BA-4740-ADD5-86FF5A2E5B23}"
 EndProject
@@ -62,6 +62,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A8B84E74-4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspnet", "aspnet", "{087E0A3C-3DE9-4D8A-8B1B-AA5DC7471A88}"
 	ProjectSection(SolutionItems) = preProject
+		docs\aspnet\feature-tag-helper.md = docs\aspnet\feature-tag-helper.md
 		docs\aspnet\index.md = docs\aspnet\index.md
 	EndProjectSection
 EndProject
@@ -73,10 +74,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Activa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "activators", "activators", "{37F031BF-EB4F-4D3A-8BA9-B25E82783ECB}"
 	ProjectSection(SolutionItems) = preProject
-		configuration.md = configuration.md
+		docs\activators\configuration.md = docs\activators\configuration.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.UnitTests", "tests\di\configuration\MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration.UnitTests.csproj", "{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspnet", "aspnet", "{951E27E9-6F04-4801-8E85-E7C75BBB2000}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.AspNetCore.UnitTests", "tests\aspnet\aspnetcore\MAF.FeaturesFlipping.AspNetCore.UnitTests.csproj", "{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -148,6 +153,10 @@ Global
 		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,5 +186,7 @@ Global
 		{AAC8BF03-AFE4-4108-961F-5A0CA69FDC91} = {EB0E8C89-DEB5-4DE7-9579-6EAD0C5430CE}
 		{37F031BF-EB4F-4D3A-8BA9-B25E82783ECB} = {A8B84E74-4790-4D82-B810-CA54BF7E220B}
 		{AC34D9C1-90CB-4F28-A9D2-ADB34109AAE8} = {6F37E2FD-3C17-4FDE-A605-116E9BE2F800}
+		{951E27E9-6F04-4801-8E85-E7C75BBB2000} = {2FBA5A4A-35D2-4A34-9870-26E5FD6C33C6}
+		{1B428CF1-16B0-4B12-82AB-AF9BB2A10F29} = {951E27E9-6F04-4801-8E85-E7C75BBB2000}
 	EndGlobalSection
 EndGlobal

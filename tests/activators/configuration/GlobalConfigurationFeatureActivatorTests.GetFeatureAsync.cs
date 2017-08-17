@@ -26,7 +26,7 @@ namespace MAF.FeaturesFlipping.Activators.Configuration.UnitTests
                 var featureActivator = new GlobalConfigurationFeatureActivator(configurationSection);
 
                 // Act
-                var actualFeature = featureActivator.GetFeatureAsync(new FeatureName("App1", "Scope1", "Feature1"))
+                var actualFeature = featureActivator.GetFeatureAsync(new FeatureSpec("App1", "Scope1", "Feature1"))
                     .Result;
 
                 // Assert

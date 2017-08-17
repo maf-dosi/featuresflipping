@@ -13,7 +13,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
             _specificFeatureFilterWithContext;
 
         private string _applicationColumnName;
-        private string _featureColumnName;
+        private string _featureNameColumnName;
         private string _isActiveColumnName;
         private string _otherColumnName;
         private string _schema;
@@ -32,7 +32,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
                 .TableName("SpecificFeature")
                 .ApplicationColumnName("Application")
                 .ScopeColumnName("Scope")
-                .FeatureColumnName("Feature")
+                .FeatureNameColumnName("FeatureName")
                 .IsActiveColumnName("IsActive")
                 .OtherColumnName(otherColumnName);
             _dbContextBuilderAction = dbContextBuilderAction ?? (_ => { });
@@ -91,16 +91,16 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
             return this;
         }
 
-        public string FeatureColumnName()
+        public string FeatureNameColumnName()
         {
-            return _featureColumnName;
+            return _featureNameColumnName;
         }
 
-        public SpecificDbContextConfiguration<TOtherColumn> FeatureColumnName(string featureColumnName)
+        public SpecificDbContextConfiguration<TOtherColumn> FeatureNameColumnName(string featureNameColumnName)
         {
-            if (!string.IsNullOrWhiteSpace(featureColumnName))
+            if (!string.IsNullOrWhiteSpace(featureNameColumnName))
             {
-                _featureColumnName = featureColumnName;
+                _featureNameColumnName = featureNameColumnName;
             }
             return this;
         }
