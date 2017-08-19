@@ -19,8 +19,7 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
             Action<DbContextOptionsBuilder> dbContextBuilderAction, Action<GlobalDbContextConfiguration> globalDbContextConfigurer)
         {
             featureFlippingBuilder.Services.AddScoped<IFeatureActivator, GlobalEntityFrameworkCoreActivator>();
-            featureFlippingBuilder.Services.AddEntityFramework()
-                .AddDbContext<GlobalFeatureDbContext>();
+            featureFlippingBuilder.Services.AddDbContext<GlobalFeatureDbContext>();
 
             var globalDbContextConfiguration = new GlobalDbContextConfiguration(dbContextBuilderAction);
             globalDbContextConfigurer(globalDbContextConfiguration);

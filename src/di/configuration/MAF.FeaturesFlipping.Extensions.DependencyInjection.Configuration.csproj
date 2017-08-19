@@ -2,7 +2,7 @@
   <Import Project="../../MAF.FeaturesFlipping.CommonAssemblyInfo.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

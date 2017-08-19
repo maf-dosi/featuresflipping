@@ -24,7 +24,7 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
             Func<IFeatureContext, Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>>> specificFeatureFilterWithContext, Action<SpecificDbContextConfiguration<TOtherColumn>> specificDbContextConfigurer)
         {
             featureFlippingBuilder.Services.AddScoped<IFeatureActivator, SpecificEntityFrameworkCoreActivator<TOtherColumn>>();
-            featureFlippingBuilder.Services.AddEntityFramework().AddDbContext<SpecificFeatureDbContext<TOtherColumn>>();
+            featureFlippingBuilder.Services.AddDbContext<SpecificFeatureDbContext<TOtherColumn>>();
 
             var specificDbContextConfiguration =
                 new SpecificDbContextConfiguration<TOtherColumn>(dbContextBuilderAction, otherColumnName,
