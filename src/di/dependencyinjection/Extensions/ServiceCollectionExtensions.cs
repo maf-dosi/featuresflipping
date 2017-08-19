@@ -1,5 +1,4 @@
-﻿using MAF.FeaturesFlipping;
-using MAF.FeaturesFlipping.Extensions.DependencyInjection;
+﻿using MAF.FeaturesFlipping.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection
@@ -8,8 +7,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IFeaturesFlippingBuilder AddFeaturesFlipping(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<IFeatureService, FeatureService>();
-            serviceCollection.AddScoped<IFeatureContextAccessor, FeatureContextAccessor>();
+            serviceCollection.AddMemoryCache();
             
             var featureFlippingBuilder = new FeaturesFlippingBuilder(serviceCollection);
             return featureFlippingBuilder;
