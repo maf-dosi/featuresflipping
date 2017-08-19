@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Optimize>True</Optimize>
     <DebugSymbols>True</DebugSymbols>
-    <Version>0.2.0</Version>
+    <Version>0.4.0</Version>
     <Authors>MAF-DOSI</Authors>
     <Company>MAF-DOSI</Company>
     <Description>MAF implementation of Features flipping</Description>
