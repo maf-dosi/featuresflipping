@@ -27,13 +27,13 @@ namespace SimpleWebSite
         {
             services.AddFeaturesFlipping()
                     .AddGlobalConfigurationActivator(Configuration.GetSection("Features"))
-                .AddSpecificEntityFrameworkCoreActivator<string>(_ => _.UseInMemoryDatabase(), "TenantId",
+                .AddSpecificEntityFrameworkCoreActivator<string>(_ => _.UseInMemoryDatabase("FeaturesFlipping"), "TenantId",
                     featureContext =>
                     {
                         var tenantId = featureContext.GetPart<string>("TenantId");
                         return feature => feature.OtherColumn == tenantId;
                     })
-                .AddGlobalEntityFrameworkCoreActivator(_ => { _.UseInMemoryDatabase(); },
+                .AddGlobalEntityFrameworkCoreActivator(_ => { _.UseInMemoryDatabase("FeaturesFlipping"); },
                     _ => _.Schema("ee"));
 
             services.AddMvc();
