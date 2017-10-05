@@ -3,10 +3,10 @@
     var featureSpec = new FeatureSpec("App1", "Scope1", "Feature1");
 }
 <div>
-    <feature application="App1" scope="Scope1" feature-name="Feature1">
-        <p>App1;Scope;Feature</p>
-    </feature> 
+    <feature application="@featureSpec.Application" scope="@featureSpec.Scope" feature-name="@featureSpec.FeatureName">
+        <p>@featureSpec</p>
+    </feature>
     <feature feature-spec="featureSpec" inverse="true">
-        <p>not(App1;Scope1;Feature1)</p>
-    </feature> 
+        <p>not(@featureSpec)</p>
+    </feature>
 </div>

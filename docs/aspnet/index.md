@@ -1,7 +1,7 @@
 # Features flipping
 ## ASP.NET Core
 
-1. Configure MAF.FeaturesFlipping (see [Configuring MAF.FeaturesFlipping](../Configure.md))
+1. Configure MAF.FeaturesFlipping (see [Configuring MAF.FeaturesFlipping](../configure.md))
 2. Install the standard Nuget package into your ASP.Net Core application
 ```
 Install-Package MAF.FeaturesFlipping.AspNetCore

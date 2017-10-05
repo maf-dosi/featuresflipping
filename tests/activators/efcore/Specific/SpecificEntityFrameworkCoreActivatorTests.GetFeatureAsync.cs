@@ -1,5 +1,7 @@
-﻿using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific;
+﻿using System;
+using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific;
 using MAF.FeaturesFlipping.Extensibility.Activators;
+using Moq;
 using Xunit;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
@@ -20,8 +22,16 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
                 // Arrange
                 var databaseName = $"{nameof(GetFeatureAsync)}:{nameof(Searching_A_Feature_Return_A_Correct_Activation_Status)}";
 
-                var context = PopulateNewContext(databaseName, "otherColumnName", _ => f => f.OtherColumn == otherColumnValue);
-                var activator = new SpecificEntityFrameworkCoreActivator<string>(context);
+                var contextAndConfiguration = PopulateNewContext(databaseName, "otherColumnName", _ => f => f.OtherColumn == otherColumnValue);
+                var featureContextServiceProviderMock = new Mock<IServiceProvider>();
+                featureContextServiceProviderMock.Setup(_ => _.GetService(typeof(SpecificFeatureDbContext<string>)))
+                    .Returns(contextAndConfiguration.Context);
+                featureContextServiceProviderMock
+                    .Setup(_ => _.GetService(typeof(SpecificDbContextConfiguration<string>)))
+                    .Returns(contextAndConfiguration.Configuration);
+                var featureContextMock = new Mock<IFeatureContext>();
+                featureContextMock.SetupGet(_ => _.FeaturesServices).Returns(featureContextServiceProviderMock.Object);
+                var activator = new SpecificEntityFrameworkCoreActivator<string>();
 
                 // Act
                 var actualFeature = await activator.GetFeatureAsync(new FeatureSpec(otherColumnValue.Replace("OtherColumn", "App"),
@@ -30,7 +40,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.UnitTests.Specific
 
                 // Assert
                 Assert.NotNull(actualFeature);
-                var actualActivationStatus = await actualFeature.GetStatusAsync(null);
+                var actualActivationStatus = await actualFeature.GetStatusAsync(featureContextMock.Object);
                 Assert.Equal(featureActivationStatus, actualActivationStatus);
             }
         }

@@ -6,6 +6,9 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
     {
         public FeaturesFlippingBuilder(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddScoped<IFeatureService, FeatureService>();
+            serviceCollection.AddScoped<IFeatureContextAccessor, FeatureContextAccessor>();
+
             Services = serviceCollection;
         }
         public IServiceCollection Services { get; }

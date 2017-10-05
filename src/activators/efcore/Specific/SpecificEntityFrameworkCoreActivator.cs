@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 
@@ -6,21 +7,15 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
 {
     public class SpecificEntityFrameworkCoreActivator<TOtherColumn> : IFeatureActivator
     {
-        private readonly SpecificFeatureDbContext<TOtherColumn> _specificFeatureDbContext;
-
-        public SpecificEntityFrameworkCoreActivator(SpecificFeatureDbContext<TOtherColumn> specificFeatureDbContext)
-        {
-            _specificFeatureDbContext = specificFeatureDbContext;
-        }
-
         public Task<IFeature> GetFeatureAsync(FeatureSpec featureSpec)
         {
-            var specificFeatureQuery = _specificFeatureDbContext.Features.Where(
+            Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>> specificFeatureQuery =
                 feature => feature.Application == featureSpec.Application
-                               && feature.Scope == featureSpec.Scope
-                               && feature.FeatureName == featureSpec.FeatureName);
-            
-            var specificFeature = new SpecificFeature<TOtherColumn>(specificFeatureQuery, _specificFeatureDbContext.SpecificConfiguration);
+                           && feature.Scope == featureSpec.Scope
+                           && feature.FeatureName == featureSpec.FeatureName;
+
+            var specificFeature =
+                new SpecificFeature<TOtherColumn>(specificFeatureQuery);
             return Task.FromResult<IFeature>(specificFeature);
         }
     }

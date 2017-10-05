@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
 {
     internal class SpecificFeature<TOtherColumn> : IFeature
     {
-        private readonly SpecificDbContextConfiguration<TOtherColumn> _specificDbContextConfiguration;
-        private readonly IQueryable<SpecificFeatureEntity<TOtherColumn>> _specificFeatureQuery;
+        private readonly Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>> _genericFeatureQuery;
 
-        public SpecificFeature(IQueryable<SpecificFeatureEntity<TOtherColumn>> specificFeatureQuery,
-            SpecificDbContextConfiguration<TOtherColumn> specificDbContextConfiguration)
+        public SpecificFeature(Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>> genericFeatureQuery)
         {
-            _specificFeatureQuery = specificFeatureQuery ??
-                                    throw new ArgumentNullException(nameof(specificFeatureQuery));
-            _specificDbContextConfiguration = specificDbContextConfiguration ??
-                                              throw new ArgumentNullException(nameof(specificDbContextConfiguration));
+            _genericFeatureQuery = genericFeatureQuery ??
+                                    throw new ArgumentNullException(nameof(genericFeatureQuery));
         }
 
         public async Task<FeatureActivationStatus> GetStatusAsync(IFeatureContext featureContext)
         {
-            var specificFeature = await _specificFeatureQuery
-                .Where(_specificDbContextConfiguration.FilterFeatureWithScope(featureContext))
+            var specificFeatureDbContext = featureContext.FeaturesServices.GetService<SpecificFeatureDbContext<TOtherColumn>>();
+            var specificDbContextConfiguration = featureContext.FeaturesServices.GetService<SpecificDbContextConfiguration<TOtherColumn>>();
+            
+            var specificFeature = await specificFeatureDbContext.Features.Where(_genericFeatureQuery)
+                .Where(specificDbContextConfiguration.FilterFeatureWithScope(featureContext))
                 .SingleOrDefaultAsync();
 
             var featureFromEntity = new FeatureFromEntity(specificFeature);

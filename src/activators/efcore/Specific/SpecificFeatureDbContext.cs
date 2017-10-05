@@ -13,7 +13,6 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
 
         public DbSet<SpecificFeatureEntity<TOtherColumn>> Features { get; set; }
 
-        internal SpecificDbContextConfiguration<TOtherColumn> SpecificConfiguration => _specificDbContextConfigurer;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

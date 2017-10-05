@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -14,12 +15,6 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests
             {
                 // Arrange
                 var serviceCollection = new ServiceCollection();
-                var expecteds = new List<ServiceDescriptor>
-                {
-                    ServiceDescriptor.Scoped<IFeatureService, FeatureService>(),
-                    ServiceDescriptor.Scoped<IFeatureContextAccessor, FeatureContextAccessor>()
-                };
-                IEqualityComparer<ServiceDescriptor> comparer = new ServiceDescriptorEqualityComparer();
 
                 // Act
                 var actual = serviceCollection.AddFeaturesFlipping();
@@ -27,11 +22,8 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.UnitTests
                 // Assert
                 Assert.NotNull(actual);
                 Assert.Equal(serviceCollection, actual.Services);
-                Assert.Equal(expecteds.Count, actual.Services.Count);
-                foreach (var expected in expecteds)
-                {
-                    Assert.Contains(expected, actual.Services, comparer);
-                }
+                Assert.True(2 < actual.Services.Count);
+                Assert.True(actual.Services.SingleOrDefault(sd => sd.ServiceType == typeof(IMemoryCache)) != null);
             }
         }
     }
