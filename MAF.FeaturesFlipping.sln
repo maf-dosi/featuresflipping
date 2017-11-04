@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{25D7998E-82BA-4740-ADD5-86FF5A2E5B23}"
 EndProject
@@ -79,6 +79,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "activators", "activators", 
 		docs\extensibility\activators\index.md = docs\extensibility\activators\index.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "featurecontext", "featurecontext", "{99C6CED7-C08A-47F8-BB4C-6435B8894C53}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.FeatureContext.Delegate", "src\featurecontext\delegate\MAF.FeaturesFlipping.FeatureContext.Delegate.csproj", "{88C56AC7-B3BD-42B1-B8E7-A3895CAD32E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "featurecontext", "featurecontext", "{CEE99703-A840-45E0-ABF0-330262130677}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAF.FeaturesFlipping.Extensions.DependencyInjection.FeatureContext.Delegate", "src\di\featurecontext\delegate\MAF.FeaturesFlipping.Extensions.DependencyInjection.FeatureContext.Delegate.csproj", "{2B2144C5-5ACE-4A3E-9A0F-1811EA6B5F7D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "featurecontext", "featurecontext", "{A2817412-78C7-4FDC-A266-1A88D811F572}"
+	ProjectSection(SolutionItems) = preProject
+		docs\featurecontext\delegate.md = docs\featurecontext\delegate.md
+		docs\featurecontext\implementations.md = docs\featurecontext\implementations.md
+		docs\featurecontext\index.md = docs\featurecontext\index.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +148,14 @@ Global
 		{B271804C-0B8F-404E-AC95-C5F21CD7E248}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B271804C-0B8F-404E-AC95-C5F21CD7E248}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B271804C-0B8F-404E-AC95-C5F21CD7E248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88C56AC7-B3BD-42B1-B8E7-A3895CAD32E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88C56AC7-B3BD-42B1-B8E7-A3895CAD32E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88C56AC7-B3BD-42B1-B8E7-A3895CAD32E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88C56AC7-B3BD-42B1-B8E7-A3895CAD32E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B2144C5-5ACE-4A3E-9A0F-1811EA6B5F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B2144C5-5ACE-4A3E-9A0F-1811EA6B5F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B2144C5-5ACE-4A3E-9A0F-1811EA6B5F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B2144C5-5ACE-4A3E-9A0F-1811EA6B5F7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +181,11 @@ Global
 		{37F031BF-EB4F-4D3A-8BA9-B25E82783ECB} = {A8B84E74-4790-4D82-B810-CA54BF7E220B}
 		{74EDF201-8F7E-479D-9744-F04E2099117A} = {A8B84E74-4790-4D82-B810-CA54BF7E220B}
 		{303A20D3-14B1-45B8-9AC5-2CB9DCEBDBEB} = {74EDF201-8F7E-479D-9744-F04E2099117A}
+		{99C6CED7-C08A-47F8-BB4C-6435B8894C53} = {25D7998E-82BA-4740-ADD5-86FF5A2E5B23}
+		{88C56AC7-B3BD-42B1-B8E7-A3895CAD32E8} = {99C6CED7-C08A-47F8-BB4C-6435B8894C53}
+		{CEE99703-A840-45E0-ABF0-330262130677} = {36DD66A8-5FD9-47A5-A0CC-0336493AAED2}
+		{2B2144C5-5ACE-4A3E-9A0F-1811EA6B5F7D} = {CEE99703-A840-45E0-ABF0-330262130677}
+		{A2817412-78C7-4FDC-A266-1A88D811F572} = {A8B84E74-4790-4D82-B810-CA54BF7E220B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30CA8035-5934-4802-B89C-8BC79CABFD7E}

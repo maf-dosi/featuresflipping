@@ -19,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\di\featurecontext\delegate\MAF.FeaturesFlipping.Extensions.DependencyInjection.FeatureContext.Delegate.csproj" />
+    <ProjectReference Include="..\..\src\featurecontext\delegate\MAF.FeaturesFlipping.FeatureContext.Delegate.csproj" />
     <ProjectReference Include="..\..\src\MAF.FeaturesFlipping.Abstractions\MAF.FeaturesFlipping.Abstractions.csproj" />
     <ProjectReference Include="..\..\src\MAF.FeaturesFlipping.Extensibility.Activators.Abstractions\MAF.FeaturesFlipping.Extensibility.Activators.Abstractions.csproj" />
     <ProjectReference Include="..\..\src\MAF.FeaturesFlipping\MAF.FeaturesFlipping.csproj" />
