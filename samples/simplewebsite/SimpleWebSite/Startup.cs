@@ -12,14 +12,10 @@ namespace SimpleWebSite
 {
     public class Startup
     {
-
         public IConfiguration Configuration { get; set; }
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -42,9 +38,6 @@ namespace SimpleWebSite
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole()
-                .AddDebug(LogLevel.Trace);
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -1,5 +1,8 @@
 ﻿using System.IO;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace SimpleWebSite
 {
@@ -7,14 +10,21 @@ namespace SimpleWebSite
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
-
-            host.Run();
+            BuildWebHost(args).Run();
         }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>()
+                .ConfigureAppConfiguration((context, config) =>
+                config.SetBasePath(context.HostingEnvironment.ContentRootPath)
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
+            .ConfigureLogging(loggingBuilder =>
+                {
+                    loggingBuilder.SetMinimumLevel(LogLevel.Trace);
+                    loggingBuilder.AddConsole();
+                    loggingBuilder.AddDebug();
+                })
+                .Build();
     }
 }
