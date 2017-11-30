@@ -33,7 +33,7 @@ namespace MAF.FeaturesFlipping
                     .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureSpec>()))
                     .Verifiable("hould never be called after inactive");
 
-                var featureService = CreateFeatureService(featureContextAccessorMock.Object, 
+                var featureService = CreateFeatureService(featureContextAccessorMock.Object,
                     featureActivators: new[] { featureActivatorInactiveMock.Object, featureActivatorNeverCalledMock.Object });
 
                 // Act
@@ -110,7 +110,7 @@ namespace MAF.FeaturesFlipping
                 // Arrange
                 var featureContextAccessorMock = new Mock<IFeatureContextAccessor>();
                 featureContextAccessorMock.Setup(_ => _.GetCurrentFeatureContextAsync())
-                    .ReturnsAsync(() => null);
+                    .ReturnsAsync(Factory.FeatureContext());
                 var featureActivatorMock = new Mock<IFeatureActivator>();
                 featureActivatorMock
                     .Setup(_ => _.GetFeatureAsync(It.IsAny<FeatureSpec>()))

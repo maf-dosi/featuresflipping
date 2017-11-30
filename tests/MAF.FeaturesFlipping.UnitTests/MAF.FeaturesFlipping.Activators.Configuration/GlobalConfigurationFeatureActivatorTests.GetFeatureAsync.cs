@@ -30,7 +30,7 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
                     .Result;
 
                 // Assert
-                var actual = actualFeature.GetStatusAsync(null).Result;
+                var actual = actualFeature.GetStatusAsync(Factory.FeatureContext()).Result;
                 Assert.Equal(FeatureActivationStatus.NotSet, actual);
             }
         }
