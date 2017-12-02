@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
 {
@@ -27,7 +28,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
                 .Where(specificDbContextConfiguration.FilterFeatureWithScope(featureContext))
                 .SingleOrDefaultAsync();
 
-            var featureFromEntity = new FeatureFromEntity(specificFeature);
+            var featureFromEntity = new FeatureFromEntity(specificFeature, new NullLogger<FeatureSpec>());
 
             return await featureFromEntity.GetStatusAsync(featureContext);
         }

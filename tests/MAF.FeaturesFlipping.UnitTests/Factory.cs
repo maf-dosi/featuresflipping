@@ -15,4 +15,9 @@ internal static class Factory
         var featureContext = new FeatureContext(serviceProviderMock.Object);
         return featureContext;
     }
+
+    public static ILogger NullLogger()
+    {
+        return new NullLogger<FeatureSpec>();
+    }
 }

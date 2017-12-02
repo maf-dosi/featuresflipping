@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
+using Microsoft.Extensions.Logging;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore
 {
@@ -7,7 +8,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore
     {
         private readonly FeatureActivationStatus _featureActivationStatus;
 
-        public FeatureFromEntity(IFeatureEntity featureEntity)
+        public FeatureFromEntity(IFeatureEntity featureEntity, ILogger logger)
         {
             if (featureEntity == null || featureEntity.IsActive == null)
             {
@@ -19,6 +20,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore
                     ? FeatureActivationStatus.Active
                     : FeatureActivationStatus.Inactive;
             }
+            logger.FeatureActivationStatusForFeatureFromEntityIs(_featureActivationStatus);
         }
 
         public Task<FeatureActivationStatus> GetStatusAsync(IFeatureContext featureContext)

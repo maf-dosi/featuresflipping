@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
-using Microsoft.EntityFrameworkCore;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
 {
@@ -15,10 +14,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
 
         public async Task<IFeature> GetFeatureAsync(FeatureSpec featureSpec)
         {
-            var globalFeatureEntity = await _globalFeatureDbContext.Features.FirstOrDefaultAsync(
-                feature => feature.Application == featureSpec.Application && feature.Scope ==
-                           featureSpec.Scope && feature.FeatureName == featureSpec.FeatureName);
-            var featureFromEntity = new FeatureFromEntity(globalFeatureEntity);
+            var featureFromEntity = await _globalFeatureDbContext.GetGlobalFeatureEntity(featureSpec);
             return featureFromEntity;
         }
     }
