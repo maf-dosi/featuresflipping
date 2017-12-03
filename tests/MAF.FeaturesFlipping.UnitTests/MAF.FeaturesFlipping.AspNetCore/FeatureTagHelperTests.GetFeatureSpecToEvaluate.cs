@@ -23,7 +23,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 };
 
                 // Act
-                var actual = featureTagHelper.GetFeatureSpecToEvaluate();
+                var actual = featureTagHelper.GetFeatureSpecToEvaluate(Factory.NullLogger());
 
                 // Assert
                 Assert.Equal(expected, actual);
@@ -43,7 +43,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 };
 
                 // Act
-                var actual = featureTagHelper.GetFeatureSpecToEvaluate();
+                var actual = featureTagHelper.GetFeatureSpecToEvaluate(Factory.NullLogger());
 
                 // Assert
                 Assert.Equal(expected, actual);

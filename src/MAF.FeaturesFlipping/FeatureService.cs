@@ -29,7 +29,7 @@ namespace MAF.FeaturesFlipping
 
         public async Task<bool> IsFeatureActiveAsync(FeatureSpec featureSpec)
         {
-            using (_logger.CreateFeatureSpecScope(featureSpec))
+            using (_logger.CreateScopeWithFeatureSpec(featureSpec))
             {
                 _logger.StartComputationOfFeatureActivationStatus();
                 if (!_featureActivationResultCache.ContainsKey(featureSpec))

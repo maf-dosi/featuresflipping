@@ -5,7 +5,7 @@ namespace MAF.FeaturesFlipping
 {
     internal static class LoggingExtensions
     {
-        private static readonly Func<ILogger, FeatureSpec, IDisposable> _createFeatureSpecScope;
+        private static readonly Func<ILogger, FeatureSpec, IDisposable> _createScopeWithFeatureSpec;
         private static readonly Action<ILogger, Exception> _startComputationOfFeatureActivationStatus;
         private static readonly Action<ILogger, string, Exception> _searchFeatureFromMemoryCache;
         private static readonly Action<ILogger, string, Exception> _putFeatureInMemoryCache;
@@ -28,7 +28,7 @@ namespace MAF.FeaturesFlipping
         static LoggingExtensions()
         {
             int eventId = 1;
-            _createFeatureSpecScope = LoggerMessage.DefineScope<FeatureSpec>("FeatureSpec: {featureSpec}");
+            _createScopeWithFeatureSpec = LoggerMessage.DefineScope<FeatureSpec>("FeatureSpec: {featureSpec}");
             _startComputationOfFeatureActivationStatus = LoggerMessage.Define(
                 LogLevel.Information,
                 new EventId(eventId++, nameof(StartComputationOfFeatureActivationStatus)),
@@ -103,9 +103,9 @@ namespace MAF.FeaturesFlipping
                 "End disposing context.");
         }
 
-        public static IDisposable CreateFeatureSpecScope(this ILogger logger, FeatureSpec featureSpec)
+        public static IDisposable CreateScopeWithFeatureSpec(this ILogger logger, FeatureSpec featureSpec)
         {
-            return _createFeatureSpecScope(logger, featureSpec);
+            return _createScopeWithFeatureSpec(logger, featureSpec);
         }
         public static void StartComputationOfFeatureActivationStatus(this ILogger logger)
         {

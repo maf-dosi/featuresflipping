@@ -10,8 +10,11 @@ namespace MAF.FeaturesFlipping.AspNetCore
         private static readonly Func<ILogger, PathString, IDisposable> _createScopeForRequest;
         private static readonly Action<ILogger, Exception> _skipExecutionOfTheResource;
         private static readonly Action<ILogger, Exception> _continueExecutionOfTheResource;
-        private static readonly Action<ILogger, string, Exception> _suppressOutputOfTag;
-        private static readonly Action<ILogger, string, Exception> _doNotSuppressOutputOfTag;
+        private static readonly Func<ILogger, string, IDisposable> _createScopeForTagName;
+        private static readonly Action<ILogger, Exception> _suppressOutputOfTag;
+        private static readonly Action<ILogger, Exception> _doNotSuppressOutputOfTag;
+        private static readonly Action<ILogger, string, string, string, Exception> _getFeatureSpecFromProperties;
+        private static readonly Action<ILogger, FeatureSpec, Exception> _getFeatureSpecFromProperty;
 
         static LoggingExtensions()
         {
@@ -20,7 +23,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 LogLevel.Debug,
                 new EventId(eventId++, nameof(CreateFeatureResourceFilterForFeatureSpec)),
                 "Create FeatureResourceFilter for '{FeatureSpec}'.");
-            _createScopeForRequest = LoggerMessage.DefineScope<PathString>("{FeatureSpec}");
+            _createScopeForRequest = LoggerMessage.DefineScope<PathString>("{RequestPath}");
             _skipExecutionOfTheResource = LoggerMessage.Define(
                 LogLevel.Information,
                 new EventId(eventId++, nameof(SkipExecutionOfTheResource)),
@@ -29,14 +32,23 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 LogLevel.Information,
                 new EventId(eventId++, nameof(ContinueExecutionOfTheResource)),
                 "Continue execution of the resource.");
-            _suppressOutputOfTag = LoggerMessage.Define<string>(
+            _createScopeForTagName = LoggerMessage.DefineScope<string>("{TagName}");
+            _suppressOutputOfTag = LoggerMessage.Define(
                 LogLevel.Information,
                 new EventId(eventId++, nameof(SuppressOutputOfTag)),
-                "Suppress output of tag '{TagName}'.");
-            _doNotSuppressOutputOfTag = LoggerMessage.Define<string>(
+                "Suppress output of tag.");
+            _doNotSuppressOutputOfTag = LoggerMessage.Define(
                 LogLevel.Information,
                 new EventId(eventId++, nameof(DoNotSuppressOutputOfTag)),
-                "Do not suppress output of tag '{TagName}'.");
+                "Do not suppress output of tag.");
+            _getFeatureSpecFromProperties = LoggerMessage.Define<string, string, string>(
+                LogLevel.Information,
+                new EventId(eventId++, nameof(GetFeatureSpecFromProperties)),
+                "Get FeatureSpec from properties Application='{Application}', Scope='{Scope}', FeatureName='{FeatureName}'.");
+            _getFeatureSpecFromProperty = LoggerMessage.Define<FeatureSpec>(
+                LogLevel.Information,
+                new EventId(eventId++, nameof(GetFeatureSpecFromProperty)),
+                "Get FeatureSpec from property FeatureSpec='{FeatureSpec}'.");
         }
 
         public static void CreateFeatureResourceFilterForFeatureSpec(this ILogger logger, FeatureSpec featureSpec)
@@ -55,13 +67,25 @@ namespace MAF.FeaturesFlipping.AspNetCore
         {
             _continueExecutionOfTheResource(logger, null);
         }
-        public static void SuppressOutputOfTag(this ILogger logger, string tagName)
+        public static IDisposable CreateScopeForTagName(this ILogger logger, string tagName)
         {
-            _suppressOutputOfTag(logger, tagName, null);
+            return _createScopeForTagName(logger, tagName);
         }
-        public static void DoNotSuppressOutputOfTag(this ILogger logger, string tagName)
+        public static void SuppressOutputOfTag(this ILogger logger)
         {
-            _doNotSuppressOutputOfTag(logger, tagName, null);
+            _suppressOutputOfTag(logger, null);
+        }
+        public static void DoNotSuppressOutputOfTag(this ILogger logger)
+        {
+            _doNotSuppressOutputOfTag(logger, null);
+        }
+        public static void GetFeatureSpecFromProperties(this ILogger logger, string application, string scope, string featureName)
+        {
+            _getFeatureSpecFromProperties(logger, application, scope, featureName, null);
+        }
+        public static void GetFeatureSpecFromProperty(this ILogger logger, FeatureSpec featureSpec)
+        {
+            _getFeatureSpecFromProperty(logger, featureSpec, null);
         }
     }
 }

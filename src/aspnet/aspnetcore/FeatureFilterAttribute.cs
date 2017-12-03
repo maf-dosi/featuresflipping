@@ -48,15 +48,19 @@ namespace MAF.FeaturesFlipping.AspNetCore
             {
                 using (_logger.CreateScopeForRequest(context.HttpContext.Request.Path))
                 {
-                    if (!await _featureService.IsFeatureActiveAsync(_featureSpec))
+                    var isFeatureActive = await _featureService.IsFeatureActiveAsync(_featureSpec);
+                    using (_logger.CreateScopeWithFeatureSpec(_featureSpec))
                     {
-                        _logger.SkipExecutionOfTheResource();
-                        context.Result = new NotFoundResult();
-                    }
-                    else
-                    {
-                        _logger.ContinueExecutionOfTheResource();
-                        await next();
+                        if (isFeatureActive)
+                        {
+                            _logger.ContinueExecutionOfTheResource();
+                            await next();
+                        }
+                        else
+                        {
+                            _logger.SkipExecutionOfTheResource();
+                            context.Result = new NotFoundResult();
+                        }
                     }
                 }
             }

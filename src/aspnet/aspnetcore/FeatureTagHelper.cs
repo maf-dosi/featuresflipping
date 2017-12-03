@@ -55,22 +55,24 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 throw new ArgumentNullException(nameof(output));
             }
 
-            var tagName = output.TagName;
             output.TagName = null;
 
-            var featureSpec = GetFeatureSpecToEvaluate();
+            var logger = _loggerFactory.CreateLogger<FeatureSpec>();
+            var featureSpec = GetFeatureSpecToEvaluate(logger);
             var isFeatureActive = await _featureService.IsFeatureActiveAsync(featureSpec);
             var suppressOutput = ShouldSuppressOutput(isFeatureActive);
 
-            var logger = _loggerFactory.CreateLogger<FeatureSpec>();
-            if (suppressOutput)
+            using (logger.CreateScopeWithFeatureSpec(featureSpec))
             {
-                logger.SuppressOutputOfTag(tagName);
-                output.SuppressOutput();
-            }
-            else
-            {
-                logger.DoNotSuppressOutputOfTag(tagName);
+                if (suppressOutput)
+                {
+                    logger.SuppressOutputOfTag();
+                    output.SuppressOutput();
+                }
+                else
+                {
+                    logger.DoNotSuppressOutputOfTag();
+                }
             }
         }
 
@@ -79,11 +81,19 @@ namespace MAF.FeaturesFlipping.AspNetCore
             return !(isFeatureActive ^ Inverse);
         }
 
-        internal FeatureSpec GetFeatureSpecToEvaluate()
+        internal FeatureSpec GetFeatureSpecToEvaluate(ILogger logger)
         {
-            var featureSpec = FeatureSpec.Equals(default(FeatureSpec))
-                ? new FeatureSpec(Application, Scope, FeatureName)
-                : FeatureSpec;
+            FeatureSpec featureSpec;
+            if (FeatureSpec.Equals(default(FeatureSpec)))
+            {
+                logger.GetFeatureSpecFromProperties(Application, Scope, FeatureName);
+                featureSpec = new FeatureSpec(Application, Scope, FeatureName);
+            }
+            else
+            {
+                logger.GetFeatureSpecFromProperty(FeatureSpec);
+                featureSpec = FeatureSpec;
+            }
             return featureSpec;
         }
     }
