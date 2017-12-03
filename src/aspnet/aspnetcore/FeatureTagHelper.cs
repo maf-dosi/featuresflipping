@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.Extensions.Logging;
 
 namespace MAF.FeaturesFlipping.AspNetCore
 {
@@ -11,6 +12,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
     [HtmlTargetElement(FeatureTagName, Attributes = InverseAttributeName)]
     public sealed class FeatureTagHelper : TagHelper
     {
+        private readonly ILoggerFactory _loggerFactory;
         private readonly IFeatureService _featureService;
 
         private const string FeatureTagName = "feature";
@@ -35,8 +37,9 @@ namespace MAF.FeaturesFlipping.AspNetCore
         [HtmlAttributeName(InverseAttributeName)]
         public bool Inverse { get; set; }
 
-        public FeatureTagHelper(IFeatureService featureService)
+        public FeatureTagHelper(IFeatureService featureService, ILoggerFactory loggerFactory)
         {
+            _loggerFactory = loggerFactory;
             _featureService = featureService ?? throw new ArgumentNullException(nameof(featureService));
         }
 
@@ -51,16 +54,23 @@ namespace MAF.FeaturesFlipping.AspNetCore
             {
                 throw new ArgumentNullException(nameof(output));
             }
-            
+
+            var tagName = output.TagName;
             output.TagName = null;
 
             var featureSpec = GetFeatureSpecToEvaluate();
             var isFeatureActive = await _featureService.IsFeatureActiveAsync(featureSpec);
             var suppressOutput = ShouldSuppressOutput(isFeatureActive);
 
+            var logger = _loggerFactory.CreateLogger<FeatureSpec>();
             if (suppressOutput)
             {
+                logger.SuppressOutputOfTag(tagName);
                 output.SuppressOutput();
+            }
+            else
+            {
+                logger.DoNotSuppressOutputOfTag(tagName);
             }
         }
 

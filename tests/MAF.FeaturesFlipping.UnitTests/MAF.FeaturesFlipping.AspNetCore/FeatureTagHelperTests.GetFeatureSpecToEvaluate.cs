@@ -14,7 +14,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 // Arrange
                 var expected = new FeatureSpec("App", "Scope", "FeatureName");
                 var featureServiceMock = new Mock<IFeatureService>();
-                var featureTagHelper = new FeatureTagHelper(featureServiceMock.Object)
+                var featureTagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory())
                 {
                     FeatureSpec = expected,
                     Application = "MyApp",
@@ -35,7 +35,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 // Arrange
                 var expected = new FeatureSpec("App", "Scope", "FeatureName");
                 var featureServiceMock = new Mock<IFeatureService>();
-                var featureTagHelper = new FeatureTagHelper(featureServiceMock.Object)
+                var featureTagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory())
                 {
                     Application = expected.Application,
                     Scope = expected.Scope,

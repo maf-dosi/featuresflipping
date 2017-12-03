@@ -14,7 +14,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
 
             // Act && Assert
             var actual = Assert.Throws<ArgumentNullException>(() => new FeatureTagHelper(
-                null));
+                null, Factory.NullLoggerFactory()));
             Assert.Equal(expectedParamName, actual.ParamName);
         }
     }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace MAF.FeaturesFlipping.AspNetCore
 {
@@ -22,7 +23,10 @@ namespace MAF.FeaturesFlipping.AspNetCore
         public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
         {
             var featureService = serviceProvider.GetRequiredService<IFeatureService>();
-            return new FeatureResourceFilter(featureService, new FeatureSpec(Application, Scope, FeatureName));
+            var featureSpec = new FeatureSpec(Application, Scope, FeatureName);
+            var logger = serviceProvider.GetRequiredService<ILogger<FeatureSpec>>();
+            logger.CreateFeatureResourceFilterForFeatureSpec(featureSpec);
+            return new FeatureResourceFilter(featureService, featureSpec, logger);
         }
 
         public bool IsReusable => false;
@@ -31,22 +35,29 @@ namespace MAF.FeaturesFlipping.AspNetCore
         {
             private readonly IFeatureService _featureService;
             private readonly FeatureSpec _featureSpec;
+            private readonly ILogger<FeatureSpec> _logger;
 
-            public FeatureResourceFilter(IFeatureService featureService, FeatureSpec featureSpec)
+            public FeatureResourceFilter(IFeatureService featureService, FeatureSpec featureSpec, ILogger<FeatureSpec> logger)
             {
                 _featureService = featureService ?? throw new ArgumentNullException(nameof(featureService));
                 _featureSpec = featureSpec;
+                _logger = logger;
             }
 
             public async Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next)
             {
-                if (!await _featureService.IsFeatureActiveAsync(_featureSpec))
+                using (_logger.CreateScopeForRequest(context.HttpContext.Request.Path))
                 {
-                    context.Result = new NotFoundResult();
-                }
-                else
-                {
-                    await next();
+                    if (!await _featureService.IsFeatureActiveAsync(_featureSpec))
+                    {
+                        _logger.SkipExecutionOfTheResource();
+                        context.Result = new NotFoundResult();
+                    }
+                    else
+                    {
+                        _logger.ContinueExecutionOfTheResource();
+                        await next();
+                    }
                 }
             }
         }
