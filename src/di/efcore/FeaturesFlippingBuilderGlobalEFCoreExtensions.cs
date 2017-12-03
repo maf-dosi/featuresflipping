@@ -2,7 +2,6 @@
 using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace

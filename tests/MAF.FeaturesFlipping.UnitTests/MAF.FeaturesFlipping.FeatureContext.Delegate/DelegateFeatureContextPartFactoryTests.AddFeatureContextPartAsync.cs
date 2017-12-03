@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using MAF.FeaturesFlipping.Extensibility.Activators;
-using Moq;
 using Xunit;
 
 namespace MAF.FeaturesFlipping.FeatureContext.Delegate
