@@ -49,7 +49,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
                 _globalDbContextConfigurer.IsActiveColumnName());
         }
 
-        internal async Task<FeatureFromEntity> GetGlobalFeatureEntity(
+        internal async Task<FeatureFromEntity<GlobalFeatureEntity>> GetGlobalFeatureEntity(
             FeatureSpec featureSpec)
         {
             var logger = _loggerFactory.CreateLogger<FeatureSpec>();
@@ -57,7 +57,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
             var globalFeatureEntity = await Features.FirstOrDefaultAsync(
                 feature => feature.Application == featureSpec.Application && feature.Scope ==
                            featureSpec.Scope && feature.FeatureName == featureSpec.FeatureName);
-            var featureFromEntity = new FeatureFromEntity(globalFeatureEntity, logger);
+            var featureFromEntity = new FeatureFromEntity<GlobalFeatureEntity>(globalFeatureEntity, logger);
             return featureFromEntity;
         }
     }

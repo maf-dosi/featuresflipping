@@ -1,35 +1,26 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using MAF.FeaturesFlipping.Extensibility.Activators;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
 {
     internal class SpecificFeature<TOtherColumn> : IFeature
     {
-        private readonly Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>> _genericFeatureQuery;
+        private readonly Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>> _specificFeatureQuery;
 
-        public SpecificFeature(Expression<Func<SpecificFeatureEntity<TOtherColumn>, bool>> genericFeatureQuery)
+        public SpecificFeature(FeatureSpec featureSpec)
         {
-            _genericFeatureQuery = genericFeatureQuery ??
-                                    throw new ArgumentNullException(nameof(genericFeatureQuery));
+            _specificFeatureQuery = feature => feature.Application == featureSpec.Application
+                           && feature.Scope == featureSpec.Scope
+                           && feature.FeatureName == featureSpec.FeatureName;
         }
 
         public async Task<FeatureActivationStatus> GetStatusAsync(IFeatureContext featureContext)
         {
             var specificFeatureDbContext = featureContext.FeaturesServices.GetService<SpecificFeatureDbContext<TOtherColumn>>();
-            var specificDbContextConfiguration = featureContext.FeaturesServices.GetService<SpecificDbContextConfiguration<TOtherColumn>>();
-            
-            var specificFeature = await specificFeatureDbContext.Features.Where(_genericFeatureQuery)
-                .Where(specificDbContextConfiguration.FilterFeatureWithScope(featureContext))
-                .SingleOrDefaultAsync();
-
-            var featureFromEntity = new FeatureFromEntity(specificFeature, new NullLogger<FeatureSpec>());
-
+            var featureFromEntity = await specificFeatureDbContext.LoadSpecificFeatureEntity(_specificFeatureQuery, featureContext);
             return await featureFromEntity.GetStatusAsync(featureContext);
         }
     }

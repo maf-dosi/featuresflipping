@@ -20,4 +20,9 @@ internal static class Factory
     {
         return new NullLogger<FeatureSpec>();
     }
+
+    public static ILoggerFactory NullLoggerFactory()
+    {
+        return new NullLoggerFactory();
+    }
 }
