@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using MAF.FeaturesFlipping.Extensibility.Activators;
-using Moq;
 using Xunit;
 
 namespace MAF.FeaturesFlipping.FeatureContext.Delegate
@@ -14,8 +12,7 @@ namespace MAF.FeaturesFlipping.FeatureContext.Delegate
             public async Task The_Context_Is_Correclty_Passed_To_The_Provided_Part_Adder_Factory_Delegate()
             {
                 // Arrange
-                var featureContextMock = new Mock<IFeatureContext>();
-                var featureContext = featureContextMock.Object;
+                var featureContext = Factory.FeatureContext();
                 var delegateFeatureContextPartFactory = new DelegateFeatureContextPartFactory(context =>
                 {
                     if (featureContext != context)
@@ -41,7 +38,7 @@ namespace MAF.FeaturesFlipping.FeatureContext.Delegate
                 }, _ => { });
 
                 // Act
-                await delegateFeatureContextPartFactory.AddFeatureContextPartAsync(null);
+                await delegateFeatureContextPartFactory.AddFeatureContextPartAsync(Factory.FeatureContext());
 
                 // Assert
                 Assert.True(paramToChange);
@@ -56,7 +53,7 @@ namespace MAF.FeaturesFlipping.FeatureContext.Delegate
                     new DelegateFeatureContextPartFactory(context => task, _ => { });
 
                 // Act & Assert
-                var actual = delegateFeatureContextPartFactory.AddFeatureContextPartAsync(null);
+                var actual = delegateFeatureContextPartFactory.AddFeatureContextPartAsync(Factory.FeatureContext());
 
                 // Assert
                 Assert.Equal(task, actual);

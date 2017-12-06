@@ -47,7 +47,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 var featureServiceMock = new Mock<IFeatureService>();
                 featureServiceMock.Setup(_ => _.IsFeatureActiveAsync(It.IsAny<FeatureSpec>()))
                     .ReturnsAsync(false);
-                var tagHelper = new FeatureTagHelper(featureServiceMock.Object);
+                var tagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory());
 
                 // Act
                 await tagHelper.ProcessAsync(context, output);
@@ -70,7 +70,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 var featureServiceMock = new Mock<IFeatureService>();
                 featureServiceMock.Setup(_ => _.IsFeatureActiveAsync(It.IsAny<FeatureSpec>()))
                     .ReturnsAsync(true);
-                var tagHelper = new FeatureTagHelper(featureServiceMock.Object);
+                var tagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory());
 
                 // Act
                 await tagHelper.ProcessAsync(context, output);
@@ -90,7 +90,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 // Arrange
                 var expectedParamName = "context";
                 var featureServiceMock = new Mock<IFeatureService>();
-                var featureTagHelper = new FeatureTagHelper(featureServiceMock.Object);
+                var featureTagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory());
 
                 // Act && Assert
                 var actual =
@@ -104,7 +104,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
                 // Arrange
                 var expectedParamName = "output";
                 var featureServiceMock = new Mock<IFeatureService>();
-                var featureTagHelper = new FeatureTagHelper(featureServiceMock.Object);
+                var featureTagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory());
                 var context = MakeTagHelperContext();
 
                 // Act && Assert

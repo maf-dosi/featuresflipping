@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific;
 using MAF.FeaturesFlipping.Extensibility.Activators;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace

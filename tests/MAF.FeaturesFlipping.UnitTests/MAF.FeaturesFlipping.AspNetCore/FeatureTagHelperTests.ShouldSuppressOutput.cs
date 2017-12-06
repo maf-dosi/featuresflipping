@@ -13,7 +13,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
             {
                 // Arrange
                 var featureServiceMock = new Mock<IFeatureService>();
-                var tagHelper = new FeatureTagHelper(featureServiceMock.Object)
+                var tagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory())
                 {
                     Inverse = true
                 };
@@ -30,7 +30,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
             {
                 // Arrange
                 var featureServiceMock = new Mock<IFeatureService>();
-                var tagHelper = new FeatureTagHelper(featureServiceMock.Object)
+                var tagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory())
                 {
                     Inverse = false
                 };
@@ -47,7 +47,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
             {
                 // Arrange
                 var featureServiceMock = new Mock<IFeatureService>();
-                var tagHelper = new FeatureTagHelper(featureServiceMock.Object)
+                var tagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory())
                 {
                     Inverse = true
                 };
@@ -64,7 +64,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
             {
                 // Arrange
                 var featureServiceMock = new Mock<IFeatureService>();
-                var tagHelper = new FeatureTagHelper(featureServiceMock.Object)
+                var tagHelper = new FeatureTagHelper(featureServiceMock.Object, Factory.NullLoggerFactory())
                 {
                     Inverse = false
                 };

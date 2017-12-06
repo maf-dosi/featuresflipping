@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using MAF.FeaturesFlipping.Extensibility.Activators;
-using Moq;
 using Xunit;
 
 namespace MAF.FeaturesFlipping.FeatureContext.Delegate
@@ -14,8 +12,7 @@ namespace MAF.FeaturesFlipping.FeatureContext.Delegate
             public void The_Context_Is_Correclty_Passed_To_The_Provided_Part_Releaser_Factory_Delegate()
             {
                 // Arrange
-                var featureContextMock = new Mock<IFeatureContext>();
-                var featureContext = featureContextMock.Object;
+                var featureContext = Factory.FeatureContext();
                 var delegateFeatureContextPartFactory = new DelegateFeatureContextPartFactory(_ => Task.CompletedTask,
                     context =>
                     {
@@ -38,7 +35,7 @@ namespace MAF.FeaturesFlipping.FeatureContext.Delegate
                     new DelegateFeatureContextPartFactory(_ => Task.CompletedTask, _ => { paramToChange = true; });
 
                 // Act
-                delegateFeatureContextPartFactory.ReleaseFeatureContextPart(null);
+                delegateFeatureContextPartFactory.ReleaseFeatureContextPart(Factory.FeatureContext());
 
                 // Assert
                 Assert.True(paramToChange);

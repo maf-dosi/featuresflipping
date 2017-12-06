@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.Extensions.Logging;
 
 namespace MAF.FeaturesFlipping.AspNetCore
 {
@@ -11,6 +12,7 @@ namespace MAF.FeaturesFlipping.AspNetCore
     [HtmlTargetElement(FeatureTagName, Attributes = InverseAttributeName)]
     public sealed class FeatureTagHelper : TagHelper
     {
+        private readonly ILoggerFactory _loggerFactory;
         private readonly IFeatureService _featureService;
 
         private const string FeatureTagName = "feature";
@@ -35,8 +37,9 @@ namespace MAF.FeaturesFlipping.AspNetCore
         [HtmlAttributeName(InverseAttributeName)]
         public bool Inverse { get; set; }
 
-        public FeatureTagHelper(IFeatureService featureService)
+        public FeatureTagHelper(IFeatureService featureService, ILoggerFactory loggerFactory)
         {
+            _loggerFactory = loggerFactory;
             _featureService = featureService ?? throw new ArgumentNullException(nameof(featureService));
         }
 
@@ -51,16 +54,25 @@ namespace MAF.FeaturesFlipping.AspNetCore
             {
                 throw new ArgumentNullException(nameof(output));
             }
-            
+
             output.TagName = null;
 
-            var featureSpec = GetFeatureSpecToEvaluate();
+            var logger = _loggerFactory.CreateLogger<FeatureSpec>();
+            var featureSpec = GetFeatureSpecToEvaluate(logger);
             var isFeatureActive = await _featureService.IsFeatureActiveAsync(featureSpec);
             var suppressOutput = ShouldSuppressOutput(isFeatureActive);
 
-            if (suppressOutput)
+            using (logger.CreateScopeWithFeatureSpec(featureSpec))
             {
-                output.SuppressOutput();
+                if (suppressOutput)
+                {
+                    logger.SuppressOutputOfTag();
+                    output.SuppressOutput();
+                }
+                else
+                {
+                    logger.DoNotSuppressOutputOfTag();
+                }
             }
         }
 
@@ -69,11 +81,19 @@ namespace MAF.FeaturesFlipping.AspNetCore
             return !(isFeatureActive ^ Inverse);
         }
 
-        internal FeatureSpec GetFeatureSpecToEvaluate()
+        internal FeatureSpec GetFeatureSpecToEvaluate(ILogger logger)
         {
-            var featureSpec = FeatureSpec.Equals(default(FeatureSpec))
-                ? new FeatureSpec(Application, Scope, FeatureName)
-                : FeatureSpec;
+            FeatureSpec featureSpec;
+            if (FeatureSpec.Equals(default(FeatureSpec)))
+            {
+                logger.GetFeatureSpecFromProperties(Application, Scope, FeatureName);
+                featureSpec = new FeatureSpec(Application, Scope, FeatureName);
+            }
+            else
+            {
+                logger.GetFeatureSpecFromProperty(FeatureSpec);
+                featureSpec = FeatureSpec;
+            }
             return featureSpec;
         }
     }

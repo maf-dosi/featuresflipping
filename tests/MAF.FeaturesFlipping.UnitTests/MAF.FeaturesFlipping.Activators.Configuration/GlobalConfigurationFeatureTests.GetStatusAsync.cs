@@ -31,7 +31,7 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
                 var feature = new GlobalConfigurationFeature(configurationSection);
 
                 // Act
-                var actual = feature.GetStatusAsync(null).Result;
+                var actual = feature.GetStatusAsync(Factory.FeatureContext()).Result;
 
                 // Assert
                 Assert.Equal(expectedFeatureActivationStatus, actual);

@@ -13,7 +13,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore
             public void A_Null_GlobalFeatureEntity_Defines_A_NotSet_Status()
             {
                 // Arrange
-                var featureFromEntity = new FeatureFromEntity(null);
+                var featureFromEntity = new FeatureFromEntity<GlobalFeatureEntity>(null, Factory.NullLogger());
                 var expected = FeatureActivationStatus.NotSet;
 
                 // Act
@@ -28,7 +28,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore
             {
                 // Arrange
                 var entity = new GlobalFeatureEntity();
-                var featureFromEntity = new FeatureFromEntity(entity);
+                var featureFromEntity = new FeatureFromEntity<GlobalFeatureEntity>(entity, Factory.NullLogger());
                 var expected = FeatureActivationStatus.NotSet;
 
                 // Act
@@ -43,7 +43,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore
             {
                 // Arrange
                 GlobalFeatureEntity entity = new GlobalFeatureEntity { IsActive = true };
-                var featureFromEntity = new FeatureFromEntity(entity);
+                var featureFromEntity = new FeatureFromEntity<GlobalFeatureEntity>(entity, Factory.NullLogger());
                 var expected = FeatureActivationStatus.Active;
 
                 // Act
@@ -58,7 +58,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore
             {
                 // Arrange
                 GlobalFeatureEntity entity = new GlobalFeatureEntity { IsActive = false };
-                var featureFromEntity = new FeatureFromEntity(entity);
+                var featureFromEntity = new FeatureFromEntity<GlobalFeatureEntity>(entity, Factory.NullLogger());
                 var expected = FeatureActivationStatus.Inactive;
 
                 // Act

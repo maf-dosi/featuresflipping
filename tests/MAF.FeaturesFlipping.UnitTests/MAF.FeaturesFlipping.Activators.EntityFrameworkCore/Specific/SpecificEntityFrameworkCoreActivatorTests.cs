@@ -14,7 +14,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Specific
             var configuration = new SpecificDbContextConfiguration<TOtherColumn>(
                 builder => builder.UseInMemoryDatabase(databaseName), otherColumnName,
                 specificFeatureFilterWithContext);
-            var context = new SpecificFeatureDbContext<TOtherColumn>(configuration);
+            var context = new SpecificFeatureDbContext<TOtherColumn>(configuration, Factory.NullLoggerFactory());
             return (context, configuration);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
 {
@@ -8,7 +9,7 @@ namespace MAF.FeaturesFlipping.Activators.EntityFrameworkCore.Global
         private static GlobalFeatureDbContext CreateNewContext(string databaseName)
         {
             var context = new GlobalFeatureDbContext(new GlobalDbContextConfiguration(
-                builder => builder.UseInMemoryDatabase(databaseName)));
+                builder => builder.UseInMemoryDatabase(databaseName)), new NullLoggerFactory());
             return context;
         }
 
