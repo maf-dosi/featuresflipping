@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{25D7998E-82BA-4740-ADD5-86FF5A2E5B23}"
 EndProject
@@ -67,6 +67,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "activators", "activators", "{37F031BF-EB4F-4D3A-8BA9-B25E82783ECB}"
 	ProjectSection(SolutionItems) = preProject
 		docs\activators\configuration.md = docs\activators\configuration.md
+		docs\activators\index.md = docs\activators\index.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "extensibility", "extensibility", "{74EDF201-8F7E-479D-9744-F04E2099117A}"

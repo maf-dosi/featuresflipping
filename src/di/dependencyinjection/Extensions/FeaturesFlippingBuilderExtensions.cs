@@ -140,7 +140,7 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
                 new ServiceDescriptor(typeof(TActiveFeatureImplementation), ActiveFeatureFactory, serviceLifetime),
                 new ServiceDescriptor(typeof(TInactiveFeatureImplementation), InactiveFeatureFactory, serviceLifetime));
         }
-        private static IEnumerable<ServiceDescriptor> CreateServiceDescriptors<TContract>(FeatureSpec featureSpec, 
+        private static IEnumerable<ServiceDescriptor> CreateServiceDescriptors<TContract>(FeatureSpec featureSpec,
             ServiceDescriptor activeFeatureServiceDescriptor, ServiceDescriptor inactiveFeatureServiceDescriptor)
         {
             yield return new ServiceDescriptor(typeof(TContract),
