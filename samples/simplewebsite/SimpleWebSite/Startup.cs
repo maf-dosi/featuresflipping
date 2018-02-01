@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SimpleWebSite.Service;
 
 namespace SimpleWebSite
 {
@@ -30,8 +31,10 @@ namespace SimpleWebSite
                         return feature => feature.OtherColumn == tenantId;
                     })
                 .AddGlobalEntityFrameworkCoreActivator(_ => { _.UseInMemoryDatabase("FeaturesFlipping"); },
-                    _ => _.Schema("ee"));
-
+                    _ => _.Schema("ee"))
+                    .RegisterScopedService<IWord, ActiveWord, InactiveWord>(new FeatureSpec("App1", "Scope1", "Feature1"))
+                    ;
+            //services.AddScoped<IWord, ActiveWord>();
             services.AddMvc();
         }
 
