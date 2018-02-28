@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace MAF.FeaturesFlipping.Activators.Configuration
 {
-    public class GlobalConfigurationFeatureActivator : IFeatureActivator
+    public class ConfigurationFeatureActivator : IFeatureActivator
     {
-        public GlobalConfigurationFeatureActivator(IConfigurationSection rootConfigurationSection)
+        public ConfigurationFeatureActivator(IConfigurationSection rootConfigurationSection)
         {
             ConfigurationSection = rootConfigurationSection ??
                                    throw new ArgumentNullException(nameof(rootConfigurationSection));
@@ -20,7 +20,7 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
             var applicationSection = ConfigurationSection.GetSection(featureSpec.Application);
             var scopeSection = applicationSection.GetSection(featureSpec.Scope);
             var featureSection = scopeSection.GetSection(featureSpec.FeatureName);
-            var globalConfigurationFeature = new GlobalConfigurationFeature(featureSection);
+            var globalConfigurationFeature = new ConfigurationFeature(featureSection);
             return Task.FromResult<IFeature>(globalConfigurationFeature);
         }
     }

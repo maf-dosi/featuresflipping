@@ -7,9 +7,9 @@ using Moq;
 using Xunit;
 
 // ReSharper disable once CheckNamespace
-namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
+namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.FeatureContext.Delegate
 {
-    public class FeaturesFlippingBuilderFeatureContextDelegateExtensionsTests
+    public partial class FeaturesFlippingBuilderFeatureContextDelegateExtensionsTests
     {
         public class AddDelegateFeatureContextPart
         {
