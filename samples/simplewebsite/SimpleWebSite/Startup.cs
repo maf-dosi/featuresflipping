@@ -23,7 +23,7 @@ namespace SimpleWebSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddFeaturesFlipping()
-                    .AddGlobalConfigurationActivator(Configuration.GetSection("Features"))
+                    .AddConfigurationActivator(Configuration.GetSection("Features"))
                 .AddSpecificEntityFrameworkCoreActivator<string>(_ => _.UseInMemoryDatabase("FeaturesFlipping"), "TenantId",
                     featureContext =>
                     {

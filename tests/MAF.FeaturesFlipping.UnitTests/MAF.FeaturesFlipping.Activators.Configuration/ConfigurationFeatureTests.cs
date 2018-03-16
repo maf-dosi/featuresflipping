@@ -6,8 +6,18 @@ using Xunit;
 namespace MAF.FeaturesFlipping.Activators.Configuration
 {
     [Trait("Category", "UnitTest")]
-    public partial class GlobalConfigurationFeatureActivatorTests
+    public partial class ConfigurationFeatureTests
     {
+        [Fact]
+        public void A_Null_ConfigurationSection_Throw_A_ArgumentNullException()
+        {
+            // Arrange
+            var expectedParamName = "configurationSection";
+
+            // Act & Assert
+            var actual = Assert.Throws<ArgumentNullException>(() => new ConfigurationFeature(null));
+            Assert.Equal(expectedParamName, actual.ParamName);
+        }
         [Fact]
         public void A_NotNull_ConfigurationSection_Do_Not_Throw_An_Exception()
         {
@@ -17,19 +27,8 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
                     new List<IConfigurationProvider>()),
                 "somePath");
             // Act & Assert
-            var feature = new GlobalConfigurationFeatureActivator(configurationSection);
+            var feature = new ConfigurationFeature(configurationSection);
             Assert.NotNull(feature);
-        }
-
-        [Fact]
-        public void A_Null_ConfigurationSection_Throw_A_ArgumentNullException()
-        {
-            // Arrange
-            var expectedParamName = "rootConfigurationSection";
-
-            // Act & Assert
-            var actual = Assert.Throws<ArgumentNullException>(() => new GlobalConfigurationFeatureActivator(null));
-            Assert.Equal(expectedParamName, actual.ParamName);
         }
     }
 }

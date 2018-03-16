@@ -9,6 +9,7 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
         private static readonly Action<ILogger, Exception> _returnNotSetActivationStatus;
         private static readonly Action<ILogger, Exception> _returnActiveActivationStatus;
         private static readonly Action<ILogger, Exception> _returnInactiveActivationStatus;
+        private static readonly Action<ILogger, string, Exception> _returnNotComputedActivationStatus;
 
         static LoggingExtensions()
         {
@@ -29,6 +30,10 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
                 LogLevel.Information,
                 new EventId(eventId++, nameof(ReturnInactiveActivationStatus)),
                 "Return Inactive activation status.");
+            _returnNotComputedActivationStatus = LoggerMessage.Define<string>(
+                LogLevel.Information,
+                new EventId(eventId++, nameof(ReturnNotComputedActivationStatus)),
+                "Return not computed activation status for reason '{reason}'.");
         }
 
         public static void RetrieveValueOfConfigurationSection(this ILogger logger, string value)
@@ -46,6 +51,10 @@ namespace MAF.FeaturesFlipping.Activators.Configuration
         public static void ReturnInactiveActivationStatus(this ILogger logger)
         {
             _returnInactiveActivationStatus(logger, null);
+        }
+        public static void ReturnNotComputedActivationStatus(this ILogger logger, string reason)
+        {
+            _returnNotComputedActivationStatus(logger, reason, null);
         }
     }
 }

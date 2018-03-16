@@ -8,12 +8,12 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection
 {
     public static class FeaturesFlippingBuilderGlobalConfigurationExtensions
     {
-        public static IFeaturesFlippingBuilder AddGlobalConfigurationActivator(
+        public static IFeaturesFlippingBuilder AddConfigurationActivator(
             this IFeaturesFlippingBuilder featureFlippingBuilder,
             IConfigurationSection configurationSection)
         {
             featureFlippingBuilder.Services.AddSingleton<IFeatureActivator>(
-                new GlobalConfigurationFeatureActivator(configurationSection));
+                new ConfigurationFeatureActivator(configurationSection));
 
             return featureFlippingBuilder;
         }

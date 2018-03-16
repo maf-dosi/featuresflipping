@@ -9,13 +9,13 @@ using Xunit;
 
 namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration
 {
-    public partial class FeaturesFlippingBuilderGlobalConfigurationExtensionsTests
+    public partial class FeaturesFlippingBuilderConfigurationExtensionsTests
     {
         [Trait("Category", "UnitTest")]
-        public class AddGlobalConfigurationActivator
+        public class AddConfigurationActivator
         {
             [Fact]
-            public void A()
+            public void A_Call_To_AddConfigurationActivator_Adds_The_Right_Services()
             {
                 // Arrange
                 var serviceCollection = new ServiceCollection();
@@ -30,7 +30,7 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration
 
                 // Act
                 var actualFeaturesFlippingBuilder =
-                    featuresFlippingBuilderMock.Object.AddGlobalConfigurationActivator(configurationSection);
+                    featuresFlippingBuilderMock.Object.AddConfigurationActivator(configurationSection);
 
                 // Assert
                 Assert.NotNull(actualFeaturesFlippingBuilder);
@@ -38,10 +38,10 @@ namespace MAF.FeaturesFlipping.Extensions.DependencyInjection.Configuration
                 Assert.Equal(1, actualFeaturesFlippingBuilder.Services.Count);
                 var actualServiceDescriptor = actualFeaturesFlippingBuilder.Services.First();
                 Assert.Equal(typeof(IFeatureActivator), actualServiceDescriptor.ServiceType);
-                Assert.IsType<GlobalConfigurationFeatureActivator>(actualServiceDescriptor.ImplementationInstance);
+                Assert.IsType<ConfigurationFeatureActivator>(actualServiceDescriptor.ImplementationInstance);
                 Assert.Equal(expectedLifetime, actualServiceDescriptor.Lifetime);
                 Assert.Equal(configurationSection,
-                    ((GlobalConfigurationFeatureActivator) actualServiceDescriptor.ImplementationInstance)
+                    ((ConfigurationFeatureActivator) actualServiceDescriptor.ImplementationInstance)
                     .ConfigurationSection);
             }
         }
