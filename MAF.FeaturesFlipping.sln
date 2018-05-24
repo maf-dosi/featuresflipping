@@ -95,6 +95,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "featurecontext", "featureco
 		docs\featurecontext\index.md = docs\featurecontext\index.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{1602AF1C-63B5-4A0B-A6AD-5566B2B2B0AB}"
+	ProjectSection(SolutionItems) = preProject
+		build\build.cake = build\build.cake
+		build.ps1 = build.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonFiles", "CommonFiles", "{52B3B2FA-EDE6-4A50-9923-7AE4042BC258}"
+	ProjectSection(SolutionItems) = preProject
+		src\CommonFiles\VersionAssemblyInfo.cs = src\CommonFiles\VersionAssemblyInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,7 +135,6 @@ Global
 		{93653151-B1FF-4FBB-97B8-26E2525E31D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{93653151-B1FF-4FBB-97B8-26E2525E31D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93653151-B1FF-4FBB-97B8-26E2525E31D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93653151-B1FF-4FBB-97B8-26E2525E31D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AAD6451E-ED18-4367-9048-3D225E03E9CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AAD6451E-ED18-4367-9048-3D225E03E9CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAD6451E-ED18-4367-9048-3D225E03E9CE}.Release|Any CPU.ActiveCfg = Release|Any CPU

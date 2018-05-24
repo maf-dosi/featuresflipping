@@ -2,7 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\CommonFiles\VersionAssemblyInfo.cs" Link="Properties\VersionAssemblyInfo.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\MAF.FeaturesFlipping.Extensibility.FeatureContext.Abstractions\MAF.FeaturesFlipping.Extensibility.FeatureContext.Abstractions.csproj" />
