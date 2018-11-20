@@ -2,7 +2,6 @@
   <Import Project="../MAF.FeaturesFlipping.CommonAssemblyInfo.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>MAF.FeaturesFlipping.Extensibility.FeatureContext</RootNamespace>
   </PropertyGroup>
 

@@ -3,10 +3,11 @@
   <PropertyGroup>
     <Optimize>True</Optimize>
     <DebugSymbols>True</DebugSymbols>
-    <Version>0.4.0</Version>
+    <Version>0.5.0</Version>
     <Authors>MAF-DOSI</Authors>
     <Company>MAF-DOSI</Company>
     <Description>MAF implementation of Features flipping</Description>
+      <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

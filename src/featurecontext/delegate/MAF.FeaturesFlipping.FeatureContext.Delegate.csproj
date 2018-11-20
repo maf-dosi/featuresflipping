@@ -1,8 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="../../MAF.FeaturesFlipping.CommonAssemblyInfo.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\..\MAF.FeaturesFlipping.Extensibility.FeatureContext.Abstractions\MAF.FeaturesFlipping.Extensibility.FeatureContext.Abstractions.csproj" />
